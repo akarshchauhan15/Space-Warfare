@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0wru6l71c6ij"]
+[gd_scene load_steps=4 format=3 uid="uid://b0wru6l71c6ij"]
 
 [ext_resource type="PackedScene" uid="uid://byftl3jnponec" path="res://Scenes/player.tscn" id="1_o8a48"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ennsb"]
+b = Vector2(0, 720)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qtdxr"]
+a = Vector2(1280, 0)
+b = Vector2(1280, 720)
 
 [node name="Playground" type="Node2D"]
 
@@ -8,3 +15,17 @@
 
 [node name="Player" parent="." instance=ExtResource("1_o8a48")]
 position = Vector2(630, 632)
+
+[node name="Boundaries" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="Left" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("SegmentShape2D_ennsb")
+
+[node name="Right" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("SegmentShape2D_qtdxr")
+
+[node name="ShiftCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

@@ -46,6 +46,7 @@ public partial class Player : CharacterBody2D
     {
         Area2D Bullet = BulletScene.Instantiate<Area2D>();
         Bullet.GlobalPosition = GlobalPosition + new Vector2(0, -20);
+        Bullet.SetCollisionMaskValue(1, false);
 
         GetParent().AddChild(Bullet);
         Cooldown.Start();
