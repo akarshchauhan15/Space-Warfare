@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Warfare", "Space Warfare.csproj", "{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{DCB83956-9D9E-4A6F-86DD-13C8F942FFAA}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8xan4fk3hffj"]
+
+[ext_resource type="Script" uid="uid://dx2cl4q6ba6tn" path="res://Scripts/Main.cs" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://b0wru6l71c6ij" path="res://Scenes/play_ground.tscn" id="2_bo1nx"]
+
+[node name="Main" type="CanvasLayer"]
+script = ExtResource("1_bo1nx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0312904, 0.0691298, 0.172759, 1)
+
+[node name="Playground" parent="." instance=ExtResource("2_bo1nx")]

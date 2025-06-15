@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://l7huurtep4uh"]
+
+[ext_resource type="Script" uid="uid://bjgxhtoli0j71" path="res://Scripts/Bullet.cs" id="1_xjght"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4mw4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjght"]
+size = Vector2(6, 23)
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_xjght")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 0.499999)
+scale = Vector2(6, 23)
+mesh = SubResource("QuadMesh_4mw4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_xjght")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
