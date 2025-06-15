@@ -5,8 +5,8 @@ public partial class Player : CharacterBody2D
     PackedScene BulletScene;
 
     float MaxVelocity = 500f;
-    float Acceleration = 1800f;
-    float Friction = 1200f;
+    float Acceleration = 2000f;
+    float Friction = 1400f;
 
     Timer Cooldown;
     int Health = 0;
