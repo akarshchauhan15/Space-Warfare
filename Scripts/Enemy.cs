@@ -1,19 +1,34 @@
 using Godot;
-using System;
 
 public partial class Enemy : CharacterBody2D
 {
+    public Texture2D Texture { get; set; }
+
     public override void _Ready()
     {
         base._Ready();
+        GetNode<Sprite2D>("Enemy").Texture = Texture;
     }
     public override void _Process(double delta)
     {
         Position += Main.Direction * Main.Speed * (float)delta;
     }
+    public void Shoot()
+    {
+        Bullet bullet = Main.BulletScene.Instantiate<Bullet>();
+        bullet.GlobalPosition = GlobalPosition + Vector2.Down * 20;
+        bullet.Direction = Vector2.Down;
+        bullet.Speed = 500 + 250 * GD.Randf();
+
+        bullet.SetCollisionMaskValue(2, false);
+        GetNode("../../").AddChild(bullet);
+    }
     public void OnHit()
     {
         Main.Speed += 5;
-        QueueFree();
+
+        Tween tween = CreateTween();
+        tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);
+        tween.TweenCallback(Callable.From(() =>  QueueFree()));
     }
 }

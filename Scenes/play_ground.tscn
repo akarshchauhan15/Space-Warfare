@@ -29,3 +29,6 @@ shape = SubResource("SegmentShape2D_qtdxr")
 [node name="ShiftCooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="RandomShootTimer" type="Timer" parent="."]
+one_shot = true

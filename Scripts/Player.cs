@@ -2,8 +2,6 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-    PackedScene BulletScene;
-
     float MaxVelocity = 500f;
     float Acceleration = 2000f;
     float Friction = 1400f;
@@ -15,7 +13,6 @@ public partial class Player : CharacterBody2D
     {
         base._Ready();
 
-        BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
         Cooldown = GetNode<Timer>("CooldownTimer");
     }
 
@@ -44,7 +41,7 @@ public partial class Player : CharacterBody2D
     }
     private void ShootBullet()
     {
-        Area2D Bullet = BulletScene.Instantiate<Area2D>();
+        Area2D Bullet = Main.BulletScene.Instantiate<Area2D>();
         Bullet.GlobalPosition = GlobalPosition + new Vector2(0, -20);
         Bullet.SetCollisionMaskValue(1, false);
 

@@ -1,4 +1,6 @@
 using Godot;
+using Godot.Collections;
+using System;
 
 public partial class Main : CanvasLayer
 {
@@ -6,9 +8,13 @@ public partial class Main : CanvasLayer
     public delegate void GameStartedEventHandler();
 
     PackedScene EnemyScene;
+    public static PackedScene BulletScene;
+
+    Array<Texture2D> EnemyTextures = new Array<Texture2D>();
 
     Node EnemyContainer;
     Timer ShiftCooldownTimer;
+    Timer RandomShootTimer;
 
     Vector2 TotalEnemies = new Vector2(8, 6);
     Vector2 EnemySize = new Vector2(100, 50);
@@ -21,13 +27,20 @@ public partial class Main : CanvasLayer
         base._Ready();
 
         EnemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/enemy.tscn");
+        BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
+
+        for (int i = 1; i < 4; i++)
+            EnemyTextures.Add(GD.Load<Texture2D>($"res://Assets/Art/Exported/Enemy{i}.png"));
 
         EnemyContainer = GetNode<Node>("Playground/Enemies");
         ShiftCooldownTimer = GetNode<Timer>("Playground/ShiftCooldownTimer");
+        RandomShootTimer = GetNode<Timer>("Playground/RandomShootTimer");
 
         GetNode<Area2D>("Playground/Boundaries").BodyEntered += ShiftEnemies;
+        RandomShootTimer.Timeout += MakeRandomEnemyShoot;
 
         SetEnemies();
+        RandomShootTimer.Start(1);
     }
 
     private void SetEnemies()
@@ -50,6 +63,8 @@ public partial class Main : CanvasLayer
     {
         Enemy Enemy = EnemyScene.Instantiate<Enemy>();
         Enemy.GlobalPosition = Vector2.One * 100 + new Vector2(Row * EnemySize.X, Column * EnemySize.Y);
+        Enemy.Texture = EnemyTextures[Column%3];
+
         EnemyContainer.AddChild(Enemy);
     }
     private void ShiftEnemies(Node2D Body)
@@ -61,5 +76,13 @@ public partial class Main : CanvasLayer
         Direction = Direction * -1;
         foreach (Enemy enemy in EnemyContainer.GetChildren())
             enemy.Position += Vector2.Down * 50;
+    }
+    private void MakeRandomEnemyShoot()
+    {
+        Random Roll = new Random();
+        int Index =  Roll.Next(EnemyContainer.GetChildCount());
+        EnemyContainer.GetChild<Enemy>(Index).Shoot();
+
+        RandomShootTimer.Start(0.6 + Roll.NextDouble() * 2);
     }
 }
