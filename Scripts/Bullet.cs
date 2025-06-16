@@ -11,6 +11,7 @@ public partial class Bullet : Area2D
         GetNode<Timer>("Timer").Timeout += QueueFree;
 
         BodyEntered += OnCollision;
+        AreaEntered += OnCollision;
     }
     public override void _Process(double delta) => Position += Direction * Speed * (float) delta;
     private void OnCollision(Node2D Body)
@@ -18,6 +19,7 @@ public partial class Bullet : Area2D
         if (Body is Player || Body is Enemy)
         Body.Call("OnHit");
 
+        Hide();
         QueueFree();
     }
 }

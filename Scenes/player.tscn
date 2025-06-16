@@ -7,7 +7,7 @@
 size = Vector2(56, 28)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 12
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_cvnsp")
 

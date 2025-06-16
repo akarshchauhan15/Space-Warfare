@@ -18,7 +18,7 @@ public partial class Enemy : CharacterBody2D
         Bullet bullet = Main.BulletScene.Instantiate<Bullet>();
         bullet.GlobalPosition = GlobalPosition + Vector2.Down * 20;
         bullet.Direction = Vector2.Down;
-        bullet.Speed = 500 + 250 * GD.Randf();
+        bullet.Speed *= 1 - GD.Randf()/2;
 
         bullet.SetCollisionMaskValue(2, false);
         GetNode("../../").AddChild(bullet);

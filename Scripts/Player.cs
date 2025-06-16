@@ -26,6 +26,8 @@ public partial class Player : CharacterBody2D
         else
             Velocity = Velocity.MoveToward(Vector2.Zero, Friction * (float)delta);
 
+        GlobalPosition = new Vector2(Mathf.Clamp(GlobalPosition.X, 30, 1250), GlobalPosition.Y);
+
         MoveAndSlide();
     }
     public override void _Input(InputEvent @event)
