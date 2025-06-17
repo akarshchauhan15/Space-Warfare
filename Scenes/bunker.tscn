@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqjb1t0q1e8o0"]
+
+[ext_resource type="Script" uid="uid://5v3elpeuk3xt" path="res://Scripts/Bunker.cs" id="1_7hew7"]
+[ext_resource type="Texture2D" uid="uid://evbvvhkaq3hr" path="res://Assets/Art/Exported/Bunker.png" id="1_nejuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hew7"]
+size = Vector2(95, 15)
+
+[node name="Bunker" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_7hew7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_7hew7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_nejuk")

@@ -81,7 +81,10 @@ public partial class Main : CanvasLayer
     {
         Random Roll = new Random();
         int Index =  Roll.Next(EnemyContainer.GetChildCount());
-        EnemyContainer.GetChild<Enemy>(Index).Shoot();
+        Enemy ChoosenOne = EnemyContainer.GetChildOrNull<Enemy>(Index);
+
+        if (ChoosenOne != null)
+        ChoosenOne.Shoot();
 
         RandomShootTimer.Start(0.6 + Roll.NextDouble() * 2);
     }

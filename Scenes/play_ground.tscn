@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0wru6l71c6ij"]
+[gd_scene load_steps=5 format=3 uid="uid://b0wru6l71c6ij"]
 
 [ext_resource type="PackedScene" uid="uid://byftl3jnponec" path="res://Scenes/player.tscn" id="1_o8a48"]
+[ext_resource type="PackedScene" uid="uid://bqjb1t0q1e8o0" path="res://Scenes/bunker.tscn" id="1_ooqan"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ennsb"]
 b = Vector2(0, 720)
@@ -12,6 +13,11 @@ b = Vector2(1280, 720)
 [node name="Playground" type="Node2D"]
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Bunker" type="Node" parent="."]
+
+[node name="Bunker" parent="Bunker" instance=ExtResource("1_ooqan")]
+position = Vector2(630, 564)
 
 [node name="Player" parent="." instance=ExtResource("1_o8a48")]
 position = Vector2(630, 632)
