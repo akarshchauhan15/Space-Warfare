@@ -3,20 +3,25 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
     [Signal]
-    public delegate void OnPlayerHitEventHandler();
+    public delegate void OnPlayerHitEventHandler(bool Dead);
 
     float MaxVelocity = 500f;
     float Acceleration = 2000f;
     float Friction = 1400f;
 
     Timer Cooldown;
-    public static int Health = 0;
+    public static int Health = 3;
 
     public override void _Ready()
     {
         base._Ready();
 
         Cooldown = GetNode<Timer>("CooldownTimer");
+    }
+    public void Reset()
+    {
+        Health = 3;
+        Modulate = Colors.White;
     }
 
     public override void _Process(double delta)
@@ -37,13 +42,22 @@ public partial class Player : CharacterBody2D
     {
         base._Input(@event);
 
+        if (!Main.IsPlaying) return;
+
         if (@event.IsActionPressed("Shoot") && Cooldown.TimeLeft == 0)
             ShootBullet();
     }
     public void OnHit()
     {
         Health--;
-        EmitSignal(SignalName.OnPlayerHit);
+
+        bool Dead = Health <= 0;
+        EmitSignal(SignalName.OnPlayerHit, Dead);
+
+        if (!Dead) return;
+
+        Tween tween = CreateTween();
+        tween.TweenProperty(this, "modulate:a", 0, 0.4f).SetTrans(Tween.TransitionType.Quad);
     }
     private void ShootBullet()
     {
@@ -51,7 +65,7 @@ public partial class Player : CharacterBody2D
         Bullet.GlobalPosition = GlobalPosition + new Vector2(0, -20);
         Bullet.SetCollisionMaskValue(1, false);
 
-        GetParent().AddChild(Bullet);
+        GetNode("../Bullets").AddChild(Bullet);
         Cooldown.Start();
     }
 }

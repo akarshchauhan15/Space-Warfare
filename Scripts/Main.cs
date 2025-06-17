@@ -4,24 +4,26 @@ using System;
 
 public partial class Main : CanvasLayer
 {
-    [Signal]
-    public delegate void GameStartedEventHandler();
-
     PackedScene EnemyScene;
     public static PackedScene BulletScene;
 
     Array<Texture2D> EnemyTextures = new Array<Texture2D>();
 
-    Node EnemyContainer;
+    public Node EnemyContainer;
     Timer ShiftCooldownTimer;
-    Timer RandomShootTimer;
+    public Timer RandomShootTimer;
 
-    Vector2 TotalEnemies = new Vector2(8, 6);
+    //Vector2 TotalEnemies = new Vector2(8, 6);
+    Vector2 TotalEnemies = new Vector2(2, 2);
     Vector2 EnemySize = new Vector2(100, 50);
 
-    public static Vector2 Direction = Vector2.Right;
-    public static float Speed = 80;
+    public static Vector2 EnemyDirection = Vector2.Right;
+    public static float EnemySpeed = 80;
+    public static int CurrentStage = 1;
 
+    public static bool IsPlaying = false;
+    public static bool EnemyDownCheck = false;
+    
     public override void _Ready()
     {
         base._Ready();
@@ -39,7 +41,12 @@ public partial class Main : CanvasLayer
         GetNode<Area2D>("Playground/Boundaries").BodyEntered += ShiftEnemies;
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
 
+        StartGame();
+    }
+    public void StartGame()
+    {
         SetEnemies();
+        IsPlaying = true;
         RandomShootTimer.Start(1);
     }
 
@@ -73,18 +80,24 @@ public partial class Main : CanvasLayer
             return;
 
         ShiftCooldownTimer.Start();
-        Direction = Direction * -1;
+        EnemyDirection = EnemyDirection * -1;
         foreach (Enemy enemy in EnemyContainer.GetChildren())
             enemy.Position += Vector2.Down * 50;
     }
     private void MakeRandomEnemyShoot()
     {
         Random Roll = new Random();
-        int Index =  Roll.Next(EnemyContainer.GetChildCount());
-        Enemy ChoosenOne = EnemyContainer.GetChildOrNull<Enemy>(Index);
+        
+        int Enemies = EnemyContainer.GetChildCount();
+        int Index = Roll.Next(Enemies);
 
-        if (ChoosenOne != null)
-        ChoosenOne.Shoot();
+        if (!EnemyDownCheck && (Enemies <= 5))
+            EnemyDownCheck = true;
+
+        if (Enemies <= 0)
+            return;
+
+        EnemyContainer.GetChild<Enemy>(Index).Shoot();
 
         RandomShootTimer.Start(0.6 + Roll.NextDouble() * 2);
     }

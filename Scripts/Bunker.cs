@@ -11,6 +11,11 @@ public partial class Bunker : Area2D
 
         if (Health > 0) return;
 
-        QueueFree();
+        GetNode<CollisionShape2D>("Collision").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+    }
+    public void Reset()
+    {
+        GetNode<Sprite2D>("Sprite2D").Modulate = Colors.White;
+        GetNode<CollisionShape2D>("Collision").SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
     }
 }
