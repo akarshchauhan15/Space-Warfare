@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8xan4fk3hffj"]
+[gd_scene load_steps=4 format=3 uid="uid://b8xan4fk3hffj"]
 
 [ext_resource type="Script" uid="uid://dx2cl4q6ba6tn" path="res://Scripts/Main.cs" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b0wru6l71c6ij" path="res://Scenes/play_ground.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cba3bvjolwhhe" path="res://Scenes/hud.tscn" id="3_8gbba"]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_bo1nx")
@@ -15,3 +16,6 @@ grow_vertical = 2
 color = Color(0.0312904, 0.0691298, 0.172759, 1)
 
 [node name="Playground" parent="." instance=ExtResource("2_bo1nx")]
+
+[node name="HUD" parent="." instance=ExtResource("3_8gbba")]
+mouse_filter = 2

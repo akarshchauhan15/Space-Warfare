@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cba3bvjolwhhe"]
+
+[ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
+[ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
+[ext_resource type="FontFile" uid="uid://cib3jro7fne0d" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="3_t1xeu"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bjfho")
+
+[node name="HealthInfo" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -42.0
+offset_right = 87.0
+offset_bottom = -8.0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="HealthInfo"]
+layout_mode = 1
+offset_top = 2.0
+offset_right = 39.0
+offset_bottom = 31.0
+texture = ExtResource("2_6fbih")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HealthInfo"]
+layout_mode = 1
+offset_left = 42.0
+offset_top = -6.0
+offset_right = 86.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 40
+text = "x3"

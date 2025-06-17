@@ -25,7 +25,7 @@ public partial class Enemy : CharacterBody2D
     }
     public void OnHit()
     {
-        Main.Speed += 5;
+        Main.Speed += 3;
 
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);

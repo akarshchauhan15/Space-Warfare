@@ -2,12 +2,15 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
+    [Signal]
+    public delegate void OnPlayerHitEventHandler();
+
     float MaxVelocity = 500f;
     float Acceleration = 2000f;
     float Friction = 1400f;
 
     Timer Cooldown;
-    int Health = 0;
+    public static int Health = 0;
 
     public override void _Ready()
     {
@@ -40,6 +43,7 @@ public partial class Player : CharacterBody2D
     public void OnHit()
     {
         Health--;
+        EmitSignal(SignalName.OnPlayerHit);
     }
     private void ShootBullet()
     {
