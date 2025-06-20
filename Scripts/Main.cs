@@ -13,12 +13,8 @@ public partial class Main : CanvasLayer
     Timer ShiftCooldownTimer;
     public Timer RandomShootTimer;
 
-    //Vector2 TotalEnemies = new Vector2(8, 6);
-    Vector2 TotalEnemies = new Vector2(2, 2);
-    Vector2 EnemySize = new Vector2(100, 50);
-
+    public static Stage Stage = Stages.stages[0];
     public static Vector2 EnemyDirection = Vector2.Right;
-    public static float EnemySpeed = 80;
     public static int CurrentStage = 1;
 
     public static bool IsPlaying = false;
@@ -54,11 +50,11 @@ public partial class Main : CanvasLayer
     {
         int Row = 0;
 
-        while (Row < TotalEnemies.X)
+        while (Row < Stage.TotalEnemies.X)
         {
             int Column = 0;
 
-            while (Column < TotalEnemies.Y)
+            while (Column < Stage.TotalEnemies.Y)
             {
                 InitializeEnemies(Row, Column);
                 Column++;
@@ -69,7 +65,7 @@ public partial class Main : CanvasLayer
     private void InitializeEnemies(int Row, int Column)
     {
         Enemy Enemy = EnemyScene.Instantiate<Enemy>();
-        Enemy.GlobalPosition = Vector2.One * 100 + new Vector2(Row * EnemySize.X, Column * EnemySize.Y);
+        Enemy.GlobalPosition = Vector2.One * 100 + new Vector2(Row * Stage.EnemySize.X, Column * Stage.EnemySize.Y);
         Enemy.Texture = EnemyTextures[Column%3];
 
         EnemyContainer.AddChild(Enemy);

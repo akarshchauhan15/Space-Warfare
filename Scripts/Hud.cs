@@ -44,7 +44,10 @@ public partial class Hud : Control
     }
     private void ContinueButtonPressed()
     {
-        Main.CurrentStage = LastRoundWon ? Main.CurrentStage++ : 1;
+        //Main.CurrentStage = LastRoundWon ? Main.CurrentStage++ : 1;
+        if (LastRoundWon) Main.CurrentStage++;
+        else Main.CurrentStage = 1;
+
         LastRoundWon = false;
 
         Declaration.Hide();
@@ -54,6 +57,8 @@ public partial class Hud : Control
             Enemy.Free();
         foreach (Node Bullet in GetNode("../Playground/Bullets").GetChildren())
             Bullet.Free();
+
+        Main.Stage = Stages.stages[Main.CurrentStage - 1];
 
         GetParent<Main>().StartGame();
     }
