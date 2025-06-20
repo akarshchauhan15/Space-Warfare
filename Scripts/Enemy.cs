@@ -6,6 +6,7 @@ public partial class Enemy : CharacterBody2D
     public delegate void EnemyDownEventHandler();
 
     public Texture2D Texture { get; set; }
+    public static float Speed;
 
     public override void _Ready()
     {
@@ -15,7 +16,7 @@ public partial class Enemy : CharacterBody2D
     public override void _Process(double delta)
     {
         if (Main.IsPlaying)
-        Position += Main.EnemyDirection * Main.Stage.EnemySpeed * (float)delta;
+        Position += Main.EnemyDirection * Speed * (float)delta;
     }
     public void Shoot()
     {
@@ -32,7 +33,7 @@ public partial class Enemy : CharacterBody2D
         if (Main.EnemyDownCheck && (GetParent().GetChildCount() <= 1))
             GetNode<Hud>("../../../HUD").EndGame(true);
 
-        Main.Stage.EnemySpeed += Main.Stage.EnemyAcceleration;
+        Speed += Main.Stage.EnemyAcceleration;
 
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);

@@ -1,7 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0wru6l71c6ij"]
 
 [ext_resource type="PackedScene" uid="uid://byftl3jnponec" path="res://Scenes/player.tscn" id="1_o8a48"]
-[ext_resource type="PackedScene" uid="uid://bqjb1t0q1e8o0" path="res://Scenes/bunker.tscn" id="1_ooqan"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ennsb"]
 b = Vector2(0, 720)
@@ -10,22 +9,19 @@ b = Vector2(0, 720)
 a = Vector2(1280, 0)
 b = Vector2(1280, 720)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ooqan"]
+size = Vector2(1280, 48)
+
 [node name="Playground" type="Node2D"]
 
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Bullets" type="Node" parent="."]
 
-[node name="Bunker" type="Node" parent="."]
-
-[node name="Bunker" parent="Bunker" instance=ExtResource("1_ooqan")]
-position = Vector2(265, 584)
-
-[node name="Bunker2" parent="Bunker" instance=ExtResource("1_ooqan")]
-position = Vector2(1001, 584)
+[node name="Bunkers" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_o8a48")]
-position = Vector2(630, 632)
+position = Vector2(630, 648)
 
 [node name="Boundaries" type="Area2D" parent="."]
 collision_layer = 8
@@ -36,6 +32,14 @@ shape = SubResource("SegmentShape2D_ennsb")
 
 [node name="Right" type="CollisionShape2D" parent="Boundaries"]
 shape = SubResource("SegmentShape2D_qtdxr")
+
+[node name="DeadZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+position = Vector2(640, 576)
+shape = SubResource("RectangleShape2D_ooqan")
 
 [node name="ShiftCooldownTimer" type="Timer" parent="."]
 wait_time = 0.5

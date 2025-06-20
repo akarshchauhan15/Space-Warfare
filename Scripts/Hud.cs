@@ -1,6 +1,5 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
+
 
 public partial class Hud : Control
 {
@@ -32,8 +31,11 @@ public partial class Hud : Control
         else
             Declaration.Text = "GAME OVER!";
         Declaration.Show();
-        ContinueButton.Show();
+        
         GetParent<Main>().RandomShootTimer.Stop();
+
+        Tween tween = CreateTween();
+        tween.TweenCallback(Callable.From(() => ContinueButton.Show())).SetDelay(0.4f);
     }
     private void PlayerHit(bool Dead)
     {
@@ -44,7 +46,6 @@ public partial class Hud : Control
     }
     private void ContinueButtonPressed()
     {
-        //Main.CurrentStage = LastRoundWon ? Main.CurrentStage++ : 1;
         if (LastRoundWon) Main.CurrentStage++;
         else Main.CurrentStage = 1;
 
@@ -57,6 +58,8 @@ public partial class Hud : Control
             Enemy.Free();
         foreach (Node Bullet in GetNode("../Playground/Bullets").GetChildren())
             Bullet.Free();
+        foreach (Node Bunker in GetNode("../Playground/Bunkers").GetChildren())
+            Bunker.Free();
 
         Main.Stage = Stages.stages[Main.CurrentStage - 1];
 

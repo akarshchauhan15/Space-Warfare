@@ -5,6 +5,7 @@ using System;
 public partial class Main : CanvasLayer
 {
     PackedScene EnemyScene;
+    PackedScene BunkerScene;
     public static PackedScene BulletScene;
 
     Array<Texture2D> EnemyTextures = new Array<Texture2D>();
@@ -25,6 +26,7 @@ public partial class Main : CanvasLayer
         base._Ready();
 
         EnemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/enemy.tscn");
+        BunkerScene = ResourceLoader.Load<PackedScene>("res://Scenes/bunker.tscn");
         BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
 
         for (int i = 1; i < 4; i++)
@@ -35,13 +37,17 @@ public partial class Main : CanvasLayer
         RandomShootTimer = GetNode<Timer>("Playground/RandomShootTimer");
 
         GetNode<Area2D>("Playground/Boundaries").BodyEntered += ShiftEnemies;
+        GetNode<Area2D>("Playground/DeadZone").BodyEntered += (Node2D Body) => GetNode<Hud>("HUD").EndGame(false);
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
 
         StartGame();
     }
     public void StartGame()
     {
+        Enemy.Speed = Stage.EnemySpeed;
         SetEnemies();
+        SetBunkers();
+
         IsPlaying = true;
         RandomShootTimer.Start(1);
     }
@@ -60,6 +66,18 @@ public partial class Main : CanvasLayer
                 Column++;
             }
             Row++;
+        }
+    }
+    private void SetBunkers()
+    {
+        Array<Vector2> CoordsList = Stage.GetBunkerCoords();
+        Node BunkerContainer = GetNode<Node>("Playground/Bunkers");
+
+        foreach(Vector2 Coord in CoordsList)
+        {
+            Bunker Bunker = BunkerScene.Instantiate<Bunker>();
+            Bunker.GlobalPosition = Coord;
+            BunkerContainer.AddChild(Bunker);
         }
     }
     private void InitializeEnemies(int Row, int Column)

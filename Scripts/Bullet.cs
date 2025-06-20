@@ -16,9 +16,10 @@ public partial class Bullet : Area2D
     public override void _Process(double delta) => Position += Direction * Speed * (float) delta;
     private void OnCollision(Node2D Body)
     {
+        Speed = 0;
         if ((Body is Player || Body is Enemy || Body is Bunker) && Body.HasMethod("OnHit"))
         Body.Call("OnHit");
-
+        
         Hide();
         QueueFree();
     }
