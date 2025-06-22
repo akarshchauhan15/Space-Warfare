@@ -38,5 +38,11 @@ public partial class Enemy : CharacterBody2D
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);
         tween.TweenCallback(Callable.From(() =>  QueueFree()));
+
+        GpuParticles2D Particles =  Main.DestructionParticleScene.Instantiate<GpuParticles2D>();
+        Particles.GlobalPosition = GlobalPosition;
+        Particles.Emitting = true;
+
+        GetNode<Node>("../../").AddChild(Particles);
     }
 }

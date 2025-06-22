@@ -6,6 +6,7 @@ public partial class Main : CanvasLayer
 {
     PackedScene EnemyScene;
     PackedScene BunkerScene;
+    public static PackedScene DestructionParticleScene;
     public static PackedScene BulletScene;
 
     Array<Texture2D> EnemyTextures = new Array<Texture2D>();
@@ -27,6 +28,7 @@ public partial class Main : CanvasLayer
 
         EnemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/enemy.tscn");
         BunkerScene = ResourceLoader.Load<PackedScene>("res://Scenes/bunker.tscn");
+        DestructionParticleScene = ResourceLoader.Load<PackedScene>("res://Scenes/Particles/destruction_particles.tscn");
         BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
 
         for (int i = 1; i < 4; i++)
