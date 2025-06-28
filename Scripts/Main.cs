@@ -43,6 +43,7 @@ public partial class Main : CanvasLayer
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
 
         StartGame();
+        Engine.TimeScale = 0.1f;
     }
     public void StartGame()
     {

@@ -11,6 +11,7 @@ public partial class Bunker : Area2D
 
         if (Health > 0) return;
 
+        GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("BunkerExplosion");
         GetNode<CollisionShape2D>("Collision").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
     }
     public void Reset()

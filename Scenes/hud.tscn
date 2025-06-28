@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=7 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
 [ext_resource type="FontFile" uid="uid://cib3jro7fne0d" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="3_t1xeu"]
+[ext_resource type="AudioStream" uid="uid://bcsde2d2ssx17" path="res://Assets/Sounds/laserShoot.wav" id="4_6fbih"]
+[ext_resource type="AudioStream" uid="uid://3ojq1e62q4bn" path="res://Assets/Sounds/enemyHit.wav" id="5_t1xeu"]
+[ext_resource type="AudioStream" uid="uid://bow17b0le23ji" path="res://Assets/Sounds/bunkerExplosion.wav" id="6_36asn"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -84,3 +87,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="LaserShoot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_6fbih")
+max_polyphony = 3
+
+[node name="EnemyHit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_t1xeu")
+max_polyphony = 3
+
+[node name="BunkerExplosion" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_36asn")
+volume_db = -4.0

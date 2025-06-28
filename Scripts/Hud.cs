@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Hud : Control
 {
@@ -35,6 +36,12 @@ public partial class Hud : Control
 
         Tween tween = CreateTween();
         tween.TweenCallback(Callable.From(() => ContinueButton.Show())).SetDelay(0.4f);
+    }
+    public void PlaySound(string SoundName)
+    {
+        AudioStreamPlayer Audio = GetNodeOrNull<AudioStreamPlayer>("Sounds/" + SoundName);
+        if (Audio != null) Audio.Play();
+        else GD.PrintErr("Audio stream "+ SoundName + " not found!");
     }
     private void PlayerHit(bool Dead)
     {
