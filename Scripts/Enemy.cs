@@ -34,6 +34,7 @@ public partial class Enemy : CharacterBody2D
             GetNode<Hud>("../../../HUD").EndGame(true);
 
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("LaserShoot");
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 
         Speed += Main.Stage.EnemyAcceleration;
 

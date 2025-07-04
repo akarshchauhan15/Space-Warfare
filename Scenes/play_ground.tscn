@@ -20,6 +20,8 @@ size = Vector2(1280, 48)
 
 [node name="Bunkers" type="Node" parent="."]
 
+[node name="Extras" type="Node" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("1_o8a48")]
 position = Vector2(630, 648)
 
@@ -41,9 +43,15 @@ collision_mask = 2
 position = Vector2(640, 576)
 shape = SubResource("RectangleShape2D_ooqan")
 
-[node name="ShiftCooldownTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="ShiftCooldownTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
 one_shot = true
 
-[node name="RandomShootTimer" type="Timer" parent="."]
+[node name="RandomShootTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="MothershipSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 20.0
 one_shot = true

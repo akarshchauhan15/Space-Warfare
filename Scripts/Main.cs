@@ -6,6 +6,7 @@ public partial class Main : CanvasLayer
 {
     PackedScene EnemyScene;
     PackedScene BunkerScene;
+    PackedScene MothershipScene;
     public static PackedScene DestructionParticleScene;
     public static PackedScene BulletScene;
 
@@ -13,6 +14,7 @@ public partial class Main : CanvasLayer
 
     public Node EnemyContainer;
     Timer ShiftCooldownTimer;
+    Timer MothershipSpawnTimer;
     public Timer RandomShootTimer;
 
     public static Stage Stage = Stages.stages[0];
@@ -28,6 +30,7 @@ public partial class Main : CanvasLayer
 
         EnemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/enemy.tscn");
         BunkerScene = ResourceLoader.Load<PackedScene>("res://Scenes/bunker.tscn");
+        MothershipScene = ResourceLoader.Load<PackedScene>("res://Scenes/mothership.tscn");
         DestructionParticleScene = ResourceLoader.Load<PackedScene>("res://Scenes/Particles/destruction_particles.tscn");
         BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
 
@@ -35,15 +38,16 @@ public partial class Main : CanvasLayer
             EnemyTextures.Add(GD.Load<Texture2D>($"res://Assets/Art/Exported/Enemy{i}.png"));
 
         EnemyContainer = GetNode<Node>("Playground/Enemies");
-        ShiftCooldownTimer = GetNode<Timer>("Playground/ShiftCooldownTimer");
-        RandomShootTimer = GetNode<Timer>("Playground/RandomShootTimer");
+        ShiftCooldownTimer = GetNode<Timer>("Playground/Timers/ShiftCooldownTimer");
+        RandomShootTimer = GetNode<Timer>("Playground/Timers/RandomShootTimer");
+        MothershipSpawnTimer = GetNode<Timer>("Playground/Timers/MothershipSpawnTimer");
 
         GetNode<Area2D>("Playground/Boundaries").BodyEntered += ShiftEnemies;
         GetNode<Area2D>("Playground/DeadZone").BodyEntered += (Node2D Body) => GetNode<Hud>("HUD").EndGame(false);
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
+        MothershipSpawnTimer.Timeout += SpawnMothership;
 
         StartGame();
-        Engine.TimeScale = 0.1f;
     }
     public void StartGame()
     {
@@ -53,6 +57,7 @@ public partial class Main : CanvasLayer
 
         IsPlaying = true;
         RandomShootTimer.Start(1);
+        MothershipSpawnTimer.Start(5);
     }
 
     private void SetEnemies()
@@ -117,5 +122,14 @@ public partial class Main : CanvasLayer
         EnemyContainer.GetChild<Enemy>(Index).Shoot();
 
         RandomShootTimer.Start(0.6 + Roll.NextDouble() * 2);
+    }
+    private void SpawnMothership()
+    {
+        Mothership Mothership = MothershipScene.Instantiate<Mothership>();
+
+        Mothership.Direction = (int) ( 2 * (0.5d - new Random().Next(0, 2)));
+        Mothership.GlobalPosition = new Vector2(640 + (700 * Mothership.Direction), 100);
+        
+        GetNode("Playground/Extras").AddChild(Mothership);
     }
 }

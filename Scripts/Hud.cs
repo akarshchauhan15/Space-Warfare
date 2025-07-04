@@ -66,6 +66,8 @@ public partial class Hud : Control
             Bullet.Free();
         foreach (Node Bunker in GetNode("../Playground/Bunkers").GetChildren())
             Bunker.Free();
+        foreach (Node Extra in GetNode("../Playground/Extras").GetChildren())
+            Extra.Free();
 
         Main.Stage = Stages.stages[Main.CurrentStage - 1];
 
