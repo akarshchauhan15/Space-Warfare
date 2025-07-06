@@ -23,6 +23,7 @@ public partial class Main : CanvasLayer
 
     public static bool IsPlaying = false;
     public static bool EnemyDownCheck = false;
+    public static bool IsMothershipInAction = false;
     
     public override void _Ready()
     {
@@ -128,7 +129,9 @@ public partial class Main : CanvasLayer
         Mothership Mothership = MothershipScene.Instantiate<Mothership>();
 
         Mothership.Direction = (int) ( 2 * (0.5d - new Random().Next(0, 2)));
-        Mothership.GlobalPosition = new Vector2(640 + (700 * Mothership.Direction), 100);
+        Mothership.GlobalPosition = new Vector2(640 + (700 * Mothership.Direction), 76);
+
+        IsMothershipInAction = true;
         
         GetNode("Playground/Extras").AddChild(Mothership);
     }

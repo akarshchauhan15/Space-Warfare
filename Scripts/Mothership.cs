@@ -12,7 +12,7 @@ public partial class Mothership : CharacterBody2D
         base._Ready();
         VisibleNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 
-        VisibleNotifier.ScreenExited += QueueFree;
+        VisibleNotifier.ScreenExited += () => { CheckEnemyLeft(); QueueFree(); } ;
     }
     public override void _Process(double delta)
     {
@@ -21,17 +21,22 @@ public partial class Mothership : CharacterBody2D
     }
     public void OnHit()
     {
-        if (Health > 0)
-        {
-            Health--;
-            return;
-        }
+        if (Health > 0)  { Health--; return; }
 
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("LaserShoot");
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 
+        Hud.AddScore(40);
+        CheckEnemyLeft();
+
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);
         tween.TweenCallback(Callable.From(() => QueueFree()));
+    }
+    private void CheckEnemyLeft()
+    {
+        Main.IsMothershipInAction = false;
+        if (Main.EnemyDownCheck && (GetParent().GetChildCount() <= 1) && (GetNode("../../Enemies").GetChildCount() == 0))
+            GetNode<Hud>("../../../HUD").EndGame(true);
     }
 }

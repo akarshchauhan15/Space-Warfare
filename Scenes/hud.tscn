@@ -16,6 +16,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bjfho")
 
+[node name="ScoreInfo" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 127.0
+offset_bottom = 34.0
+
+[node name="Label" type="Label" parent="ScoreInfo"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 71.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 30
+text = "SCORE"
+
+[node name="Score" type="Label" parent="ScoreInfo"]
+layout_mode = 0
+offset_left = 78.0
+offset_right = 141.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
 [node name="HealthInfo" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2

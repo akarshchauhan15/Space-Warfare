@@ -1,9 +1,9 @@
 using Godot;
-using System;
 
 public partial class Hud : Control
 {
     Label HealthLabel;
+    static Label ScoreLabel;
     Label Declaration;
     Button ContinueButton;
 
@@ -13,6 +13,7 @@ public partial class Hud : Control
         base._Ready();
 
         HealthLabel = GetNode<Label>("HealthInfo/Label");
+        ScoreLabel = GetNode<Label>("ScoreInfo/Score");
         Declaration = GetNode<Label>("DeclarationLabel");
         ContinueButton = GetNode<Button>("ContinueButton");
 
@@ -25,8 +26,9 @@ public partial class Hud : Control
 
         if (Win)
         {
-            Declaration.Text = (Main.CurrentStage < 5) ? "STAGE CLEARED!" : "VICTORY!";
-            LastRoundWon = true;
+            bool StageLeft = Main.CurrentStage < Stages.stages.Count;
+            Declaration.Text = (StageLeft) ? "STAGE CLEARED!" : "VICTORY!";
+            if (StageLeft) LastRoundWon = true;
         }
         else
             Declaration.Text = "GAME OVER!";
@@ -43,6 +45,12 @@ public partial class Hud : Control
         if (Audio != null) Audio.Play();
         else GD.PrintErr("Audio stream "+ SoundName + " not found!");
     }
+    public static void AddScore(int Score)
+    {
+        Player.Score += Score;
+        Player.Score = Mathf.Max(Player.Score, 0);
+        ScoreLabel.Text = Player.Score.ToString();
+    }
     private void PlayerHit(bool Dead)
     {
         if (Dead)
@@ -53,7 +61,7 @@ public partial class Hud : Control
     private void ContinueButtonPressed()
     {
         if (LastRoundWon) Main.CurrentStage++;
-        else Main.CurrentStage = 1;
+        else { Main.CurrentStage = 1; AddScore(-Player.Score); }
 
         LastRoundWon = false;
 

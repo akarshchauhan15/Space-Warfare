@@ -30,13 +30,14 @@ public partial class Enemy : CharacterBody2D
     }
     public void OnHit()
     {
-        if (Main.EnemyDownCheck && (GetParent().GetChildCount() <= 1))
+        if (Main.EnemyDownCheck && (GetParent().GetChildCount() <= 1) && (GetNode("../../Extras").GetChildCount() == 0) )
             GetNode<Hud>("../../../HUD").EndGame(true);
 
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("LaserShoot");
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 
         Speed += Main.Stage.EnemyAcceleration;
+        Hud.AddScore(10);
 
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);

@@ -11,6 +11,7 @@ public partial class Player : CharacterBody2D
 
     Timer Cooldown;
     public static int Health = 3;
+    public static int Score = 0;
 
     public override void _Ready()
     {
@@ -23,9 +24,10 @@ public partial class Player : CharacterBody2D
         Health = 3;
         Modulate = Colors.White;
     }
-
     public override void _Process(double delta)
     {
+        if (!Main.IsPlaying) return;
+
         float InputDirection = Input.GetAxis("Left", "Right");
 
         if (InputDirection != 0)
@@ -53,6 +55,8 @@ public partial class Player : CharacterBody2D
 
         bool Dead = Health <= 0;
         EmitSignal(SignalName.OnPlayerHit, Dead);
+
+        Hud.AddScore(-20);
 
         if (!Dead) return;
 
