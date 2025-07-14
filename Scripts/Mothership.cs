@@ -12,7 +12,7 @@ public partial class Mothership : CharacterBody2D
         base._Ready();
         VisibleNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 
-        VisibleNotifier.ScreenExited += () => { CheckEnemyLeft(); QueueFree(); } ;
+        VisibleNotifier.ScreenExited += () => { CheckEnemyLeft(); QueueFree(); };
     }
     public override void _Process(double delta)
     {

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8xan4fk3hffj"]
+[gd_scene load_steps=5 format=3 uid="uid://b8xan4fk3hffj"]
 
 [ext_resource type="Script" uid="uid://dx2cl4q6ba6tn" path="res://Scripts/Main.cs" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b0wru6l71c6ij" path="res://Scenes/play_ground.tscn" id="2_bo1nx"]
+[ext_resource type="Texture2D" uid="uid://bcxb2yhg6pn52" path="res://Assets/Art/Exported/BackgroundStars.png" id="2_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cba3bvjolwhhe" path="res://Scenes/hud.tscn" id="3_8gbba"]
 
 [node name="Main" type="CanvasLayer"]
@@ -16,7 +17,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0312904, 0.0691298, 0.172759, 1)
 
+[node name="Stars" type="Parallax2D" parent="."]
+repeat_size = Vector2(1280, 720)
+autoscroll = Vector2(0, 10)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stars"]
+modulate = Color(1, 1, 1, 0.67451)
+position = Vector2(640, 360)
+scale = Vector2(5, 5)
+texture = ExtResource("2_jjvhh")
+
+[node name="Stars2" type="Parallax2D" parent="."]
+repeat_size = Vector2(768, 360)
+autoscroll = Vector2(0, 5)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Stars2"]
+modulate = Color(1, 1, 1, 0.32549)
+texture_repeat = 2
+position = Vector2(384, 216)
+scale = Vector2(3, 3)
+texture = ExtResource("2_jjvhh")
+
 [node name="Playground" parent="." instance=ExtResource("2_bo1nx")]
 
 [node name="HUD" parent="." instance=ExtResource("3_8gbba")]
 mouse_filter = 2
+metadata/_edit_lock_ = true

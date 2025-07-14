@@ -5,6 +5,9 @@ public partial class Player : CharacterBody2D
     [Signal]
     public delegate void OnPlayerHitEventHandler(bool Dead);
 
+    Parallax2D StarsParallax;
+    Parallax2D Stars2Parallax;
+
     float MaxVelocity = 500f;
     float Acceleration = 2000f;
     float Friction = 1400f;
@@ -17,6 +20,8 @@ public partial class Player : CharacterBody2D
     {
         base._Ready();
 
+        StarsParallax = GetNode<Parallax2D>("../../Stars");
+        Stars2Parallax = GetNode<Parallax2D>("../../Stars2");
         Cooldown = GetNode<Timer>("CooldownTimer");
     }
     public void Reset()
@@ -37,6 +42,9 @@ public partial class Player : CharacterBody2D
             Velocity = Velocity.MoveToward(Vector2.Zero, Friction * (float)delta);
 
         GlobalPosition = new Vector2(Mathf.Clamp(GlobalPosition.X, 30, 1250), GlobalPosition.Y);
+
+        StarsParallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.08f, StarsParallax.ScrollOffset.Y);
+        Stars2Parallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.04f, Stars2Parallax.ScrollOffset.Y);
 
         MoveAndSlide();
     }

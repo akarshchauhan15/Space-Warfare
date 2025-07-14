@@ -57,6 +57,7 @@ public partial class Main : CanvasLayer
         SetBunkers();
 
         IsPlaying = true;
+        GetNode<Player>("Playground/Player").Velocity = Vector2.Zero;
         RandomShootTimer.Start(1);
         MothershipSpawnTimer.Start(5);
     }
