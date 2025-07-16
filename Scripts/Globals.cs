@@ -30,13 +30,13 @@ public partial class Stage : Resource
 }
 public class Stages
 {
-    /*public static Array<Stage> stages = [
+    public static Array<Stage> stages = [
         new Stage(new Vector2(8, 6), new Vector2(100, 50), 80, 3, 2),
         new Stage(new Vector2(8, 6), new Vector2(100, 50), 90, 4, 2)
-        ];*/
+        ];
 
-    public static Array<Stage> stages = [
+    /*public static Array<Stage> stages = [
     new Stage(new Vector2(2, 2), new Vector2(100, 50), 80, 3, 2),
         new Stage(new Vector2(2, 2), new Vector2(100, 50), 90, 4, 2)
-    ];
+    ];*/
 }

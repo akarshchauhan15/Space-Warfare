@@ -21,6 +21,7 @@ color = Color(0.0312904, 0.0691298, 0.172759, 1)
 repeat_size = Vector2(1280, 720)
 autoscroll = Vector2(0, 10)
 repeat_times = 2
+follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Stars"]
 modulate = Color(1, 1, 1, 0.67451)
@@ -32,6 +33,7 @@ texture = ExtResource("2_jjvhh")
 repeat_size = Vector2(768, 360)
 autoscroll = Vector2(0, 5)
 repeat_times = 10
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Stars2"]
 modulate = Color(1, 1, 1, 0.32549)
@@ -44,4 +46,6 @@ texture = ExtResource("2_jjvhh")
 
 [node name="HUD" parent="." instance=ExtResource("3_8gbba")]
 mouse_filter = 2
-metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)

@@ -28,6 +28,8 @@ public partial class Player : CharacterBody2D
     {
         Health = 3;
         Modulate = Colors.White;
+        GlobalPosition = new Vector2(630, 648); 
+        EmitSignal(SignalName.OnPlayerHit, false);
     }
     public override void _Process(double delta)
     {

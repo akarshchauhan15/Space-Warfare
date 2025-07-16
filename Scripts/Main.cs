@@ -35,7 +35,7 @@ public partial class Main : CanvasLayer
         DestructionParticleScene = ResourceLoader.Load<PackedScene>("res://Scenes/Particles/destruction_particles.tscn");
         BulletScene = ResourceLoader.Load<PackedScene>("res://Scenes/bullet.tscn");
 
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i <= 4; i++)
             EnemyTextures.Add(GD.Load<Texture2D>($"res://Assets/Art/Exported/Enemy{i}.png"));
 
         EnemyContainer = GetNode<Node>("Playground/Enemies");
@@ -94,7 +94,7 @@ public partial class Main : CanvasLayer
     {
         Enemy Enemy = EnemyScene.Instantiate<Enemy>();
         Enemy.GlobalPosition = Vector2.One * 100 + new Vector2(Row * Stage.EnemySize.X, Column * Stage.EnemySize.Y);
-        Enemy.Texture = EnemyTextures[Column%3];
+        Enemy.Texture = EnemyTextures[Column%4];
 
         EnemyContainer.AddChild(Enemy);
     }

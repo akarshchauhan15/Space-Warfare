@@ -61,7 +61,13 @@ public partial class Hud : Control
     private void ContinueButtonPressed()
     {
         if (LastRoundWon) Main.CurrentStage++;
-        else {   Main.CurrentStage = 1; AddScore(-Player.Score); }
+
+        else 
+        { 
+            Main.CurrentStage = 1;
+            AddScore(-Player.Score);
+            GetNode<Player>("../Playground/Player").Reset();
+        }
 
         LastRoundWon = false;
 
