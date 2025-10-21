@@ -3,7 +3,7 @@ using Godot;
 public partial class Mothership : CharacterBody2D
 {
     float Speed = 100f;
-    int Health = 3;
+    int Health = 4;
     public int Direction {  get; set; }
     VisibleOnScreenNotifier2D VisibleNotifier;
 
@@ -21,7 +21,10 @@ public partial class Mothership : CharacterBody2D
     }
     public void OnHit()
     {
-        if (Health > 0)  { Health--; return; }
+        Health--;
+        Modulate = Modulate.Darkened(0.1f);
+
+        if (Health > 0) return;
 
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("LaserShoot");
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);

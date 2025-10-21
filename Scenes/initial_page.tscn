@@ -1,0 +1,249 @@
+[gd_scene load_steps=7 format=3 uid="uid://u1qlu58v00ij"]
+
+[ext_resource type="Script" path="res://Scripts/InitialPage.cs" id="1_37ig4"]
+[ext_resource type="FontFile" uid="uid://cib3jro7fne0d" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="2_hqrgh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqrgh"]
+bg_color = Color(0.27022174, 0.27022195, 0.2702219, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.12591079, 0.12591085, 0.12591082, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37ig4"]
+bg_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2teh5"]
+bg_color = Color(0.3328807, 0.33288068, 0.33288068, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37ig4"]
+
+[node name="InitialPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37ig4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03137255, 0.07058824, 0.17254902, 1)
+
+[node name="Counter" type="Label" parent="."]
+layout_mode = 1
+offset_left = 1164.0
+offset_top = 634.0
+offset_right = 1251.0
+offset_bottom = 700.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_hqrgh")
+theme_override_font_sizes/font_size = 60
+text = "1/3"
+horizontal_alignment = 2
+
+[node name="Pages" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="Control" parent="Pages"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="Pages/1"]
+clip_contents = false
+layout_mode = 1
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 942.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[outline_color=000000]WELCOME TO[/outline_color] [outline_size=10][color=373737]SPACE WARFARE"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Pages/1"]
+clip_contents = false
+layout_mode = 1
+offset_left = 59.0
+offset_top = 224.0
+offset_right = 1186.0
+offset_bottom = 514.0
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/paragraph_separation = -10
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "Space Warfare is a clone of Space Invaders originally designed by [outline_size=8][outline_color=ffffff][color=#24396e]Tomoshiro Nishikado[/color][/outline_color][/outline_size].
+
+This tutorial page only appears on initial launch. It will guide you about the basics of this game.
+
+Click to anywhere to [pulse freq=1 color=#6f8fd9 ease=-3]continue."
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="2" type="Control" parent="Pages"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="Pages/2"]
+clip_contents = false
+layout_mode = 1
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 963.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[outline_color=000000]GAMEPLAY [/outline_color][outline_size=10][color=373737]MECHANICS[/color]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Pages/2"]
+clip_contents = false
+layout_mode = 1
+offset_left = 59.0
+offset_top = 224.0
+offset_right = 1186.0
+offset_bottom = 514.0
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/paragraph_separation = -10
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "The game is simple. Shoot the [outline_size=8][outline_color=b82c33]enemy spaceships[/outline_color][/outline_size] and dodge the incoming bullets.
+
+Use bunkers as a cover. Don't let the enemies reach near them. Once they do, the game will end.
+
+A [outline_size=8][outline_color=9a7b00]mothership[/outline_color][/outline_size] frequently spawns from either side near the top and travells across the screen. Shoot it down for extra points."
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="3" type="Control" parent="Pages"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="Pages/3"]
+clip_contents = false
+layout_mode = 1
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 913.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[outline_color=000000]ADDITIONAL [/outline_color][outline_size=10][color=373737]INFORMATION[/color]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label3" type="RichTextLabel" parent="Pages/3"]
+clip_contents = false
+layout_mode = 1
+offset_left = 59.0
+offset_top = 224.0
+offset_right = 1186.0
+offset_bottom = 514.0
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/paragraph_separation = -10
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "The game's [pulse freq=1 color=#6f8fd9 ease=-3]source code[/pulse] is freely availiable on [outline_size=8][outline_color=ffffff][color=#24396e]GitHub[/color][/outline_color][/outline_size].
+
+Report any bugs or suggest a new feature in issues tab.
+
+You're good to go now.
+Enjoy."
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="PreviousButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -86.0
+offset_right = 226.0
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_constants/outline_size = 6
+theme_override_constants/h_separation = 6
+theme_override_fonts/font = ExtResource("2_hqrgh")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_hqrgh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_37ig4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2teh5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_37ig4")
+text = "PREVIOUS"

@@ -23,12 +23,15 @@ public partial class Player : CharacterBody2D
         StarsParallax = GetNode<Parallax2D>("../../Stars");
         Stars2Parallax = GetNode<Parallax2D>("../../Stars2");
         Cooldown = GetNode<Timer>("CooldownTimer");
+
+        StarsParallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.08f, StarsParallax.ScrollOffset.Y);
+        Stars2Parallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.04f, Stars2Parallax.ScrollOffset.Y);
     }
     public void Reset()
     {
         Health = 3;
         Modulate = Colors.White;
-        GlobalPosition = new Vector2(630, 648); 
+        GlobalPosition = new Vector2(640, 648); 
         EmitSignal(SignalName.OnPlayerHit, false);
     }
     public override void _Process(double delta)

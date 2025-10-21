@@ -19,6 +19,7 @@ public partial class Hud : Control
 
         GetNode<Player>("../Playground/Player").OnPlayerHit += PlayerHit;
         ContinueButton.Pressed += ContinueButtonPressed;
+        GetNode<Button>("InitialStart/StartButton").Pressed += () => GetNode<AnimationPlayer>("InitialStart/AnimationPlayer").Play("Clicked");
     }
     public void EndGame(bool Win)
     {
@@ -51,10 +52,13 @@ public partial class Hud : Control
         Player.Score = Mathf.Max(Player.Score, 0);
         ScoreLabel.Text = Player.Score.ToString();
     }
+    private void InitialStartAnimationEnded()
+    {
+        GetParent<Main>().StartGame();
+    }
     private void PlayerHit(bool Dead)
     {
-        if (Dead)
-            EndGame(false);
+        if (Dead) EndGame(false);
 
         HealthLabel.Text = "x" + Player.Health;
     }

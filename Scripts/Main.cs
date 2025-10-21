@@ -47,8 +47,6 @@ public partial class Main : CanvasLayer
         GetNode<Area2D>("Playground/DeadZone").BodyEntered += (Node2D Body) => GetNode<Hud>("HUD").EndGame(false);
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
         MothershipSpawnTimer.Timeout += SpawnMothership;
-
-        StartGame();
     }
     public void StartGame()
     {
@@ -88,6 +86,7 @@ public partial class Main : CanvasLayer
             Bunker Bunker = BunkerScene.Instantiate<Bunker>();
             Bunker.GlobalPosition = Coord;
             BunkerContainer.AddChild(Bunker);
+            Bunker.Fade();
         }
     }
     private void InitializeEnemies(int Row, int Column)
@@ -130,7 +129,7 @@ public partial class Main : CanvasLayer
         Mothership Mothership = MothershipScene.Instantiate<Mothership>();
 
         Mothership.Direction = (int) ( 2 * (0.5d - new Random().Next(0, 2)));
-        Mothership.GlobalPosition = new Vector2(640 + (700 * Mothership.Direction), 76);
+        Mothership.GlobalPosition = new Vector2(640 + (700 * Mothership.Direction), 56);
 
         IsMothershipInAction = true;
         

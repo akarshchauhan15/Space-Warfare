@@ -9,7 +9,7 @@ public partial class Stage : Resource
     public int EnemyAcceleration { get; set; }
     public int TotalBunkers { get; set; }
 
-    Array<Array<float>> BunkerXCoords = [[265, 1001]];
+    Array<Array<float>> BunkerXCoords = [[265, 1001], [190, 460, 820, 1090]];
 
     public Stage(Vector2 totalEnemies, Vector2 enemySize, float enemySpeed, int enemyAcceleration, int totalBunkers)
     {
@@ -22,7 +22,7 @@ public partial class Stage : Resource
     public Array<Vector2> GetBunkerCoords()
     {
         Array<Vector2> BunkerCoords = new Array<Vector2>();
-        foreach (float X in BunkerXCoords[TotalBunkers - 2])
+        foreach (float X in BunkerXCoords[TotalBunkers/2 - 1])
             BunkerCoords.Add(new Vector2(X, 580));
 
         return BunkerCoords;
@@ -31,8 +31,11 @@ public partial class Stage : Resource
 public class Stages
 {
     public static Array<Stage> stages = [
-        new Stage(new Vector2(8, 6), new Vector2(100, 50), 80, 3, 2),
-        new Stage(new Vector2(8, 6), new Vector2(100, 50), 90, 4, 2)
+        new Stage(new Vector2(6, 6), new Vector2(100, 50), 70, 3, 2),
+        new Stage(new Vector2(7, 6), new Vector2(100, 50), 80, 4, 2),
+        new Stage(new Vector2(8, 6), new Vector2(100, 50), 85, 4, 4),
+        new Stage(new Vector2(8, 6), new Vector2(100, 50), 90, 5, 4),
+        new Stage(new Vector2(8, 7), new Vector2(100, 50), 95, 5, 4)
         ];
 
     /*public static Array<Stage> stages = [

@@ -32,7 +32,7 @@ texture = ExtResource("2_jjvhh")
 [node name="Stars2" type="Parallax2D" parent="."]
 repeat_size = Vector2(768, 360)
 autoscroll = Vector2(0, 5)
-repeat_times = 10
+repeat_times = 2
 ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Stars2"]
