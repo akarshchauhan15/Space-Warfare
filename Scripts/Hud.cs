@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Hud : Control
 {
-    Label HealthLabel;
+    public static Label HealthLabel;
     static Label ScoreLabel;
     Label Declaration;
     Button ContinueButton;

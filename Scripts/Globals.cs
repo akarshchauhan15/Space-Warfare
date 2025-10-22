@@ -44,4 +44,8 @@ public class Stages
         new Stage(new Vector2(8, 7), new Vector2(100, 50), 95, 5, 4, 10)
         ];
 }
-public enum EnemyDrops { None, Health, Freeze, Slowdown, BunkerReset}
+public class EnemyDrops
+{
+    public enum Types { None, Health, Freeze, Slowdown, BunkerReset }
+    public static string[] ShortNames = ["H+", "Fz", "Sd", "Br"];
+}

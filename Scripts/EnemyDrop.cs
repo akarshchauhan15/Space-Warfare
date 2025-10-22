@@ -3,17 +3,17 @@ using Godot;
 public partial class EnemyDrop : Area2D
 {
     public int Speed;
-    public EnemyDrops DropType;
+    public EnemyDrops.Types DropType;
 
     public override void _Ready()
-    {
+    { 
         Speed = GD.RandRange(50, 80);
         BodyEntered += OnCollision;
     }
     public override void _Process(double delta) => Position += Vector2.Down * Speed * (float) delta;
 
     public void OnCollision(Node2D Body)
-    {
+    {     
         QueueFree();
         Hud.AddScore(20);
 
@@ -22,51 +22,38 @@ public partial class EnemyDrop : Area2D
 
         switch (DropType) 
         {
-            case EnemyDrops.Health:
+            case EnemyDrops.Types.Health:
                 Player.Health += 1;
                 Player.Health = Mathf.Min(Player.Health, 3);
+                Hud.HealthLabel.Text = "x" + Player.Health;
                 break;
 
-            case EnemyDrops.Freeze:
+            case EnemyDrops.Types.Freeze:
                 Timer FreezeTimer = new Timer();
                 FreezeTimer.OneShot = true;
                 GetNode("../../Timers").AddChild(FreezeTimer);
 
                 Timer RandomShootTimer = GetNode<Timer>("../../Timers/RandomShootTimer");
 
+                Vector2 PreviousEnemyDirection = Main.EnemyDirection;
+
                 FreezeTimer.Timeout += () =>
                 {
-                    EnemyContainer.Modulate = new Color(0.557f, 0.678f, 1.0f);
-                    EnemyContainer.ProcessMode = ProcessModeEnum.Inherit;
-                    RandomShootTimer.Stop();
+                    Main.EnemyDirection = PreviousEnemyDirection;
+                    EnemyContainer.Modulate = Colors.White;
+                    foreach (Enemy Enemy in EnemyContainer.GetChildren())
+                        Enemy.GetNode<AnimationPlayer>("AnimationPlayer").Play();
+                    RandomShootTimer.Start();
                     FreezeTimer.QueueFree();
                 };
 
-
+                Main.EnemyDirection = Vector2.Zero;
                 EnemyContainer.Modulate = new Color(0.557f, 0.678f, 1.0f);
-                EnemyContainer.ProcessMode = ProcessModeEnum.Disabled;
+                foreach (Enemy Enemy in EnemyContainer.GetChildren()) 
+                    Enemy.GetNode<AnimationPlayer>("AnimationPlayer").Pause();
                 RandomShootTimer.Stop();
 
-                FreezeTimer.Start(3);
-         
-
-                /*FreezeTimer.Timeout += () => 
-                {
-                    foreach (Enemy Enemy in EnemyContainer.GetChildren())
-                    {
-                        Enemy.ProcessMode = ProcessModeEnum.Inherit
-  
-                    }
-                };
-
-                foreach (Enemy Enemy in EnemyContainer.GetChildren())
-                {
-                    Enemy.ProcessMode = ProcessModeEnum.Disabled
-                    Enemy.GetNode<AnimationPlayer>("AnimationPlayer").Pause();
-                    Enemy.GetNode<Sprite2D>("Enemy").SelfModulate = new Color(0.557f, 0.678f, 1.0f);
-                }*/
-
-                FreezeTimer.Start(3);
+                FreezeTimer.Start(2);
                 break;
         }
     }

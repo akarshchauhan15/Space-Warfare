@@ -8,7 +8,7 @@ public partial class Enemy : CharacterBody2D
     public Texture2D Texture { get; set; }
     public static float Speed;
 
-    EnemyDrops CurrentEnemyDropType;
+    EnemyDrops.Types CurrentEnemyDropType;
 
     public override void _Ready()
     {
@@ -46,14 +46,13 @@ public partial class Enemy : CharacterBody2D
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);
         tween.TweenCallback(Callable.From(() =>  QueueFree()));
 
-        if (CurrentEnemyDropType != EnemyDrops.None) AddDrop();
+        if (CurrentEnemyDropType != EnemyDrops.Types.None) AddDrop();
     }
     private void SetDrop()
     {
         int Random = GD.RandRange(1, Main.Stage.RandomSize);
-        GD.Print(Random);
 
-        if (Random <= 4) CurrentEnemyDropType = (EnemyDrops) Random;
+        if (Random <= 4) CurrentEnemyDropType = (EnemyDrops.Types) Random;
     }
     private void AddDrop()
     {
@@ -64,6 +63,9 @@ public partial class Enemy : CharacterBody2D
         EnemyDrop Drop = GameData.DropScene.Instantiate() as EnemyDrop;
         Drop.DropType = CurrentEnemyDropType;
         Drop.GlobalPosition = GlobalPosition;
+
+        GD.Print((int) CurrentEnemyDropType);
+        Drop.GetNode<Label>("TextureRect/Label").Text = EnemyDrops.ShortNames[(int)Drop.DropType - 1];
 
         DropContainer.CallDeferred(Node.MethodName.AddChild, Drop);
     }

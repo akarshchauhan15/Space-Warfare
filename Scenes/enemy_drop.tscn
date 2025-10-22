@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://11qp132si5x3"]
+[gd_scene load_steps=5 format=3 uid="uid://11qp132si5x3"]
 
 [ext_resource type="Script" uid="uid://pwrocfgb40vq" path="res://Scripts/EnemyDrop.cs" id="1_75b5a"]
+[ext_resource type="FontFile" uid="uid://cib3jro7fne0d" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="2_1xxeg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipw2q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipw2q"]
 bg_color = Color(0.25919214, 0.30030593, 0.46196747, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16167904, 0.18862553, 0.2890625, 1)
 
 [node name="EnemyDrop" type="Area2D"]
 collision_layer = 0
@@ -46,7 +52,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -4.375
+offset_bottom = 4.375
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_1xxeg")
+theme_override_font_sizes/font_size = 37
 horizontal_alignment = 1
 vertical_alignment = 1
