@@ -103,7 +103,7 @@ public partial class Main : CanvasLayer
             return;
 
         ShiftCooldownTimer.Start();
-        EnemyDirection = EnemyDirection * -1;
+        EnemyDirection *= -1;
         foreach (Enemy enemy in EnemyContainer.GetChildren())
             enemy.Position += Vector2.Down * 50;
     }

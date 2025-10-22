@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqs6v5goo4670"]
 
 [ext_resource type="Script" uid="uid://djacltvhmsaj0" path="res://Scripts/Enemy.cs" id="1_hghv2"]
+[ext_resource type="Texture2D" uid="uid://30euv08kwek8" path="res://Assets/Art/Exported/Enemy2.png" id="2_1f0kj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
 size = Vector2(48, 36)
@@ -22,25 +23,9 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_1f0kj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Enemy:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1f0kj"]
 _data = {
-&"Default": SubResource("Animation_hghv2"),
-&"RESET": SubResource("Animation_1f0kj")
+&"Default": SubResource("Animation_hghv2")
 }
 
 [node name="Enemy" type="CharacterBody2D"]
@@ -54,6 +39,7 @@ shape = SubResource("RectangleShape2D_afpow")
 
 [node name="Enemy" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
+texture = ExtResource("2_1f0kj")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

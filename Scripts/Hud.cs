@@ -78,6 +78,7 @@ public partial class Hud : Control
         Declaration.Hide();
         ContinueButton.Hide();
 
+        /*
         foreach (Node Enemy in GetParent<Main>().EnemyContainer.GetChildren())
             Enemy.Free();
         foreach (Node Bullet in GetNode("../Playground/Bullets").GetChildren())
@@ -86,6 +87,15 @@ public partial class Hud : Control
             Bunker.Free();
         foreach (Node Extra in GetNode("../Playground/Extras").GetChildren())
             Extra.Free();
+        foreach (Node Drop in GetNode("../Playground/Drops").GetChildren())
+            Drop.Free();
+        */
+
+        for (int ChildIndex = 0; ChildIndex < 5; ChildIndex++)
+        {
+            foreach (Node Entity in GetNode("../Playground").GetChild(ChildIndex).GetChildren())
+                Entity.Free();
+        }
 
         Main.Stage = Stages.stages[Main.CurrentStage - 1];
 

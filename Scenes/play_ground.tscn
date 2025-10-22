@@ -14,13 +14,15 @@ size = Vector2(1280, 48)
 
 [node name="Playground" type="Node2D"]
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Bullets" type="Node" parent="."]
 
 [node name="Bunkers" type="Node" parent="."]
 
 [node name="Extras" type="Node" parent="."]
+
+[node name="Drops" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_o8a48")]
 position = Vector2(640, 648)
