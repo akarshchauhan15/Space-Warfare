@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfm8runqg46c3"]
+[gd_scene load_steps=10 format=3 uid="uid://bfm8runqg46c3"]
 
-[ext_resource type="Script" path="res://Scripts/InitialPage.cs" id="1_37ig4"]
+[ext_resource type="Script" uid="uid://cpd5hlrrlmhb" path="res://Scripts/InitialPage.cs" id="1_37ig4"]
 [ext_resource type="FontFile" uid="uid://cib3jro7fne0d" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="2_hqrgh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqrgh"]
@@ -29,6 +29,30 @@ border_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37ig4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xvgg"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.12591079, 0.12591085, 0.12591082, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gk4j"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ialil"]
+bg_color = Color(1, 1, 1, 0.20392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.12591079, 0.12591085, 0.12591082, 1)
+
 [node name="InitialPage" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -39,7 +63,6 @@ grow_vertical = 2
 script = ExtResource("1_37ig4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,25 +73,33 @@ color = Color(0.03137255, 0.07058824, 0.17254902, 1)
 
 [node name="Counter" type="Label" parent="."]
 layout_mode = 1
-offset_left = 1164.0
-offset_top = 634.0
-offset_right = 1251.0
-offset_bottom = 700.0
+offset_left = 1153.0
+offset_top = 37.0
+offset_right = 1240.0
+offset_bottom = 103.0
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_hqrgh")
 theme_override_font_sizes/font_size = 60
-text = "1/3"
+text = "1/5"
 horizontal_alignment = 2
 
 [node name="Pages" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="1" type="Control" parent="Pages"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Title" type="RichTextLabel" parent="Pages/1"]
 clip_contents = false
@@ -92,9 +123,9 @@ autowrap_mode = 0
 [node name="Label" type="RichTextLabel" parent="Pages/1"]
 clip_contents = false
 layout_mode = 1
-offset_left = 59.0
+offset_left = 80.0
 offset_top = 224.0
-offset_right = 1186.0
+offset_right = 1207.0
 offset_bottom = 514.0
 theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
 theme_override_constants/line_separation = -10
@@ -116,9 +147,12 @@ autowrap_mode = 2
 
 [node name="2" type="Control" parent="Pages"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Title" type="RichTextLabel" parent="Pages/2"]
 clip_contents = false
@@ -135,17 +169,17 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/normal_font = ExtResource("2_hqrgh")
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[outline_color=000000]GAMEPLAY [/outline_color][outline_size=10][color=373737]MECHANICS[/color]"
+text = "[outline_color=000000]GAMEPLAY [/outline_color][outline_size=10][color=373737]MECHANICS #1[/color]"
 fit_content = true
 autowrap_mode = 0
 
 [node name="Label" type="RichTextLabel" parent="Pages/2"]
 clip_contents = false
 layout_mode = 1
-offset_left = 59.0
+offset_left = 80.0
 offset_top = 224.0
-offset_right = 1186.0
-offset_bottom = 514.0
+offset_right = 1207.0
+offset_bottom = 554.0
 theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
 theme_override_constants/line_separation = -10
 theme_override_constants/paragraph_separation = -10
@@ -166,11 +200,125 @@ autowrap_mode = 2
 
 [node name="3" type="Control" parent="Pages"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Title" type="RichTextLabel" parent="Pages/3"]
+clip_contents = false
+layout_mode = 1
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 963.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[outline_color=000000]GAMEPLAY [/outline_color][outline_size=10][color=373737]MECHANICS #2[/color]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Pages/3"]
+clip_contents = false
+layout_mode = 1
+offset_left = 80.0
+offset_top = 224.0
+offset_right = 1207.0
+offset_bottom = 584.0
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/paragraph_separation = -10
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "When an enemy is finished, it may drop a pickable effect. 
+
+These include,
+
+[outline_size=8][outline_color=b82c33]Health[/outline_color][/outline_size] - Adds one heart.
+[outline_size=8][outline_color=1f7e3f]Bunker Repair[/outline_color][/outline_size] - Fixes remaining bunker by one level.
+[outline_size=8][outline_color=8a8a8a]Slowdown[/outline_color][/outline_size] - Enemies become half times slower.
+[outline_size=8][outline_color=2466da]Freeze[/outline_color][/outline_size] - Completely freezes enemies for a few seconds.
+
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="4" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="RichTextLabel" parent="Pages/4"]
+clip_contents = false
+layout_mode = 1
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 963.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[outline_color=000000]SOME EXTRA [/outline_color][outline_size=10][color=373737]TWEAKS[/color]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Pages/4"]
+clip_contents = false
+layout_mode = 1
+offset_left = 80.0
+offset_top = 224.0
+offset_right = 1207.0
+offset_bottom = 554.0
+theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/paragraph_separation = -10
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_hqrgh")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "At the location, where the game is present, a file by the name of [outline_color=2046a8][outline_size=8]settings.ini[/outline_size][/outline_color] is created.
+
+This file can be tweaked by changing values present, altering gameplay experience.
+
+Deleting the file will reset settings to default and similarly doing the same with [outline_color=2046a8][outline_size=8]scores.json[/outline_size][/outline_color] will remove previous scores."
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="5" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="RichTextLabel" parent="Pages/5"]
 clip_contents = false
 layout_mode = 1
 offset_left = 38.0
@@ -189,12 +337,12 @@ text = "[outline_color=000000]ADDITIONAL [/outline_color][outline_size=10][color
 fit_content = true
 autowrap_mode = 0
 
-[node name="Label3" type="RichTextLabel" parent="Pages/3"]
+[node name="Label" type="RichTextLabel" parent="Pages/5"]
 clip_contents = false
 layout_mode = 1
-offset_left = 59.0
+offset_left = 80.0
 offset_top = 224.0
-offset_right = 1186.0
+offset_right = 1207.0
 offset_bottom = 514.0
 theme_override_colors/font_shadow_color = Color(0.167969, 0.167969, 0.167969, 1)
 theme_override_constants/line_separation = -10
@@ -205,7 +353,7 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("2_hqrgh")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
-text = "The game's [pulse freq=1 color=#6f8fd9 ease=-3]source code[/pulse] is freely availiable on [outline_size=8][outline_color=ffffff][color=#24396e]GitHub[/color][/outline_color][/outline_size].
+text = "The game's [pulse freq=1 color=#6f8fd9 ease=-3]source code[/pulse] is freely availiable on [outline_size=8][outline_color=ffffff][color=#24396e]GitHub[/color][/outline_color][/outline_size] under MIT licence.
 
 Report any bugs or suggest a new feature in issues tab.
 
@@ -247,3 +395,50 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_37ig4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2teh5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_37ig4")
 text = "PREVIOUS"
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1051.0
+offset_top = -86.0
+offset_right = 1233.0
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/h_separation = 6
+theme_override_fonts/font = ExtResource("2_hqrgh")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xvgg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8gk4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ialil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0xvgg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_37ig4")
+text = "SKIP ALL"
+metadata/_edit_group_ = true
+
+[node name="Background" type="ColorRect" parent="SkipButton"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 178.0
+offset_bottom = 54.0
+mouse_filter = 2
+color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+
+[node name="Progress" type="ColorRect" parent="SkipButton"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 54.0
+mouse_filter = 2
+color = Color(0.23138285, 0.35161963, 0.609375, 1)
+
+[node name="SkipHoldTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true

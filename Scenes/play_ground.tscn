@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0wru6l71c6ij"]
+[gd_scene load_steps=6 format=3 uid="uid://b0wru6l71c6ij"]
 
 [ext_resource type="PackedScene" uid="uid://byftl3jnponec" path="res://Scenes/player.tscn" id="1_o8a48"]
 
@@ -11,6 +11,9 @@ b = Vector2(1280, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ooqan"]
 size = Vector2(1280, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8a48"]
+size = Vector2(1280, 174)
 
 [node name="Playground" type="Node2D"]
 
@@ -37,14 +40,31 @@ shape = SubResource("SegmentShape2D_ennsb")
 [node name="Right" type="CollisionShape2D" parent="Boundaries"]
 shape = SubResource("SegmentShape2D_qtdxr")
 
-[node name="DeadZone" type="Area2D" parent="."]
+[node name="DeadLine" type="Node2D" parent="."]
+
+[node name="DeadZone" type="Area2D" parent="DeadLine"]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadLine/DeadZone"]
 position = Vector2(640, 576)
 shape = SubResource("RectangleShape2D_ooqan")
 metadata/_edit_lock_ = true
+
+[node name="Warning" type="Area2D" parent="DeadLine"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadLine/Warning"]
+position = Vector2(640, 513)
+shape = SubResource("RectangleShape2D_o8a48")
+
+[node name="Line" type="Line2D" parent="DeadLine"]
+position = Vector2(0, 23.416687)
+points = PackedVector2Array(0, 528.5833, 1280, 528.5833)
+width = 2.0
+default_color = Color(0.533, 0.118, 0.075, 0)
 
 [node name="Timers" type="Node" parent="."]
 

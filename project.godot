@@ -14,6 +14,7 @@ config/name="Space Warfare"
 config/version="v0.1.0"
 run/main_scene="uid://b8xan4fk3hffj"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+run/max_fps=180
 config/icon="res://icon.svg"
 
 [audio]

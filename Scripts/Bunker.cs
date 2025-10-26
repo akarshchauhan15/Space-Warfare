@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Bunker : Area2D
 {
-    int Health = 5;
+    public int Health = 5;
 
     public override void _Ready()
     {
@@ -12,8 +12,7 @@ public partial class Bunker : Area2D
     public void OnHit()
     {
         Health--;
-        GetNode<Sprite2D>("Sprite2D").Modulate = GetNode<Sprite2D>("Sprite2D").Modulate.Darkened(0.2f); //new Color(1, 1, 1, 0.2f * Health);
-
+        GetNode<Sprite2D>("Sprite2D").Modulate = GetNode<Sprite2D>("Sprite2D").Modulate.Darkened(0.2f);
         if (Health > 0) return;
 
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("BunkerExplosion");

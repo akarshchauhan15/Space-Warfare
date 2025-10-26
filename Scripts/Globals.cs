@@ -4,6 +4,14 @@ using Godot.Collections;
 public partial class GameData : Resource
 {
     public static PackedScene DropScene = GD.Load<PackedScene>("res://Scenes/enemy_drop.tscn");
+
+    public enum ScoreEnum { EnemyHit, MothershipHit, DropPickup, NextStage}
+    public static Dictionary<ScoreEnum, int> ScoreValues = new Dictionary<ScoreEnum, int> { 
+        { ScoreEnum.EnemyHit, 10},
+        { ScoreEnum.MothershipHit, 40},
+        { ScoreEnum.DropPickup, 20},
+        { ScoreEnum.NextStage, 25},
+    };
 }
 public partial class Stage : Resource
 {
@@ -37,15 +45,15 @@ public partial class Stage : Resource
 public class Stages
 {
     public static Array<Stage> stages = [
-        new Stage(new Vector2(6, 6), new Vector2(100, 50), 70, 3, 2, 20),
-        new Stage(new Vector2(7, 6), new Vector2(100, 50), 80, 4, 2, 20),
-        new Stage(new Vector2(8, 6), new Vector2(100, 50), 85, 4, 4, 15),
-        new Stage(new Vector2(8, 6), new Vector2(100, 50), 90, 5, 4, 12),
-        new Stage(new Vector2(8, 7), new Vector2(100, 50), 95, 5, 4, 10)
+        new Stage(new Vector2(6, 6), new Vector2(100, 50), 70, 3, 2, 50),
+        new Stage(new Vector2(7, 6), new Vector2(100, 50), 80, 4, 2, 40),
+        new Stage(new Vector2(8, 6), new Vector2(100, 50), 85, 4, 4, 35),
+        new Stage(new Vector2(8, 6), new Vector2(100, 50), 90, 5, 4, 30),
+        new Stage(new Vector2(8, 7), new Vector2(100, 50), 95, 5, 4, 25)
         ];
 }
 public class EnemyDrops
 {
-    public enum Types { None, Health, Freeze, Slowdown, BunkerReset }
-    public static string[] ShortNames = ["H+", "Fz", "Sd", "Br"];
+    public enum Types { None, Health, Freeze, Slowdown, BunkerHealth }
+    public static string[] ShortNames = ["H+", "Fz", "Sd", "B+"];
 }

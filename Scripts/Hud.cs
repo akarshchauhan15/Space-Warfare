@@ -27,6 +27,7 @@ public partial class Hud : Control
 
         if (Win)
         {
+            Hud.AddScore(GameData.ScoreValues[GameData.ScoreEnum.NextStage]);
             bool StageLeft = Main.CurrentStage < Stages.stages.Count;
             Declaration.Text = (StageLeft) ? "STAGE CLEARED!" : "VICTORY!";
             if (StageLeft) LastRoundWon = true;
@@ -78,24 +79,13 @@ public partial class Hud : Control
         Declaration.Hide();
         ContinueButton.Hide();
 
-        /*
-        foreach (Node Enemy in GetParent<Main>().EnemyContainer.GetChildren())
-            Enemy.Free();
-        foreach (Node Bullet in GetNode("../Playground/Bullets").GetChildren())
-            Bullet.Free();
-        foreach (Node Bunker in GetNode("../Playground/Bunkers").GetChildren())
-            Bunker.Free();
-        foreach (Node Extra in GetNode("../Playground/Extras").GetChildren())
-            Extra.Free();
-        foreach (Node Drop in GetNode("../Playground/Drops").GetChildren())
-            Drop.Free();
-        */
-
         for (int ChildIndex = 0; ChildIndex < 5; ChildIndex++)
         {
             foreach (Node Entity in GetNode("../Playground").GetChild(ChildIndex).GetChildren())
                 Entity.Free();
         }
+
+        GetNode<Line2D>("../Playground/DeadLine/Line").DefaultColor = new Color(0.533f, 0.118f, 0.075f, 0.0f);
 
         Main.Stage = Stages.stages[Main.CurrentStage - 1];
 

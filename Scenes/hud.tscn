@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=17 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
@@ -6,6 +6,24 @@
 [ext_resource type="AudioStream" uid="uid://bcsde2d2ssx17" path="res://Assets/Sounds/laserShoot.wav" id="4_6fbih"]
 [ext_resource type="AudioStream" uid="uid://3ojq1e62q4bn" path="res://Assets/Sounds/enemyHit.wav" id="5_t1xeu"]
 [ext_resource type="AudioStream" uid="uid://bow17b0le23ji" path="res://Assets/Sounds/bunkerExplosion.wav" id="6_36asn"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8jye8"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_43w4t"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7gr8i"]
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_5ep0j"]
+events = [SubResource("InputEventKey_8jye8"), SubResource("InputEventKey_43w4t"), SubResource("InputEventJoypadButton_7gr8i")]
+
+[sub_resource type="Shortcut" id="Shortcut_4f5kr"]
+events = [SubResource("InputEventKey_8jye8"), SubResource("InputEventKey_43w4t"), SubResource("InputEventJoypadButton_7gr8i")]
 
 [sub_resource type="Animation" id="Animation_8jye8"]
 resource_name = "Blink"
@@ -420,6 +438,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut = SubResource("Shortcut_5ep0j")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 flat = true
 
 [node name="InitialStart" type="Control" parent="."]
@@ -439,6 +460,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut = SubResource("Shortcut_4f5kr")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 flat = true
 metadata/_edit_lock_ = true
 

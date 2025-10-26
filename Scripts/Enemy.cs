@@ -19,7 +19,7 @@ public partial class Enemy : CharacterBody2D
     public override void _Process(double delta)
     {
         if (Main.IsPlaying)
-        Position += Main.EnemyDirection * Speed * (float)delta;
+        Position += Main.EnemyDirection * Speed * (float)delta * EnemyDrop.EnemySpeedMultiplier;
     }
     public void Shoot()
     {
@@ -36,11 +36,13 @@ public partial class Enemy : CharacterBody2D
         if (Main.EnemyDownCheck && (GetParent().GetChildCount() <= 1) && (GetNode("../../Extras").GetChildCount() == 0) )
             GetNode<Hud>("../../../HUD").EndGame(true);
 
+        EmitSignal(SignalName.EnemyDown);
+
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("EnemyHit");
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 
         Speed += Main.Stage.EnemyAcceleration;
-        Hud.AddScore(10);
+        Hud.AddScore(GameData.ScoreValues[GameData.ScoreEnum.EnemyHit]);
 
         Tween tween = CreateTween();
         tween.TweenProperty(this, "modulate:a", 0, 0.2).SetTrans(Tween.TransitionType.Quad);
@@ -64,7 +66,6 @@ public partial class Enemy : CharacterBody2D
         Drop.DropType = CurrentEnemyDropType;
         Drop.GlobalPosition = GlobalPosition;
 
-        GD.Print((int) CurrentEnemyDropType);
         Drop.GetNode<Label>("TextureRect/Label").Text = EnemyDrops.ShortNames[(int)Drop.DropType - 1];
 
         DropContainer.CallDeferred(Node.MethodName.AddChild, Drop);

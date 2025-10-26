@@ -13,6 +13,8 @@ public partial class Main : CanvasLayer
     Array<Texture2D> EnemyTextures = new Array<Texture2D>();
 
     public Node EnemyContainer;
+    Area2D WarningArea;
+    public Line2D WarningLine;
     Timer ShiftCooldownTimer;
     Timer MothershipSpawnTimer;
     public Timer RandomShootTimer;
@@ -24,6 +26,7 @@ public partial class Main : CanvasLayer
     public static bool IsPlaying = false;
     public static bool EnemyDownCheck = false;
     public static bool IsMothershipInAction = false;
+    bool EnemiesInProximity = false;
     
     public override void _Ready()
     {
@@ -39,12 +42,14 @@ public partial class Main : CanvasLayer
             EnemyTextures.Add(GD.Load<Texture2D>($"res://Assets/Art/Exported/Enemy{i}.png"));
 
         EnemyContainer = GetNode<Node>("Playground/Enemies");
+        WarningArea = GetNode<Area2D>("Playground/DeadLine/Warning");
+        WarningLine = GetNode<Line2D>("Playground/DeadLine/Line");
         ShiftCooldownTimer = GetNode<Timer>("Playground/Timers/ShiftCooldownTimer");
         RandomShootTimer = GetNode<Timer>("Playground/Timers/RandomShootTimer");
         MothershipSpawnTimer = GetNode<Timer>("Playground/Timers/MothershipSpawnTimer");
 
         GetNode<Area2D>("Playground/Boundaries").BodyEntered += ShiftEnemies;
-        GetNode<Area2D>("Playground/DeadZone").BodyEntered += (Node2D Body) => GetNode<Hud>("HUD").EndGame(false);
+        GetNode<Area2D>("Playground/DeadLine/DeadZone").BodyEntered += (Node2D Body) => GetNode<Hud>("HUD").EndGame(false);
         RandomShootTimer.Timeout += MakeRandomEnemyShoot;
         MothershipSpawnTimer.Timeout += SpawnMothership;
     }
@@ -94,6 +99,7 @@ public partial class Main : CanvasLayer
         Enemy Enemy = EnemyScene.Instantiate<Enemy>();
         Enemy.GlobalPosition = Vector2.One * 100 + new Vector2(Row * Stage.EnemySize.X, Column * Stage.EnemySize.Y);
         Enemy.Texture = EnemyTextures[Column%4];
+        Enemy.EnemyDown += RemoveDeadZoneWarning;
 
         EnemyContainer.AddChild(Enemy);
     }
@@ -106,6 +112,8 @@ public partial class Main : CanvasLayer
         EnemyDirection *= -1;
         foreach (Enemy enemy in EnemyContainer.GetChildren())
             enemy.Position += Vector2.Down * 50;
+
+        SetDeadZoneWarning();
     }
     private void MakeRandomEnemyShoot()
     {
@@ -117,8 +125,7 @@ public partial class Main : CanvasLayer
         if (!EnemyDownCheck && (Enemies <= 5))
             EnemyDownCheck = true;
 
-        if (Enemies <= 0)
-            return;
+        if (Enemies <= 0) return;
 
         EnemyContainer.GetChild<Enemy>(Index).Shoot();
 
@@ -134,5 +141,21 @@ public partial class Main : CanvasLayer
         IsMothershipInAction = true;
         
         GetNode("Playground/Extras").AddChild(Mothership);
+    }
+    private void SetDeadZoneWarning()
+    {
+        if (EnemiesInProximity || !WarningArea.HasOverlappingBodies()) return;
+        
+        Tween tween = CreateTween();
+        tween.TweenProperty(WarningLine, "default_color:a", 1, 1).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+        EnemiesInProximity = true;
+    }
+    private void RemoveDeadZoneWarning()
+    {
+        if (WarningArea.HasOverlappingBodies()) return;
+
+        Tween tween = CreateTween();
+        tween.TweenProperty(WarningLine, "default_color:a", 0, 1).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+        EnemiesInProximity = false;
     }
 }

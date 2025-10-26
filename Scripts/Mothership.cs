@@ -29,7 +29,7 @@ public partial class Mothership : CharacterBody2D
         GetTree().Root.GetNode<Hud>("Main/HUD").PlaySound("LaserShoot");
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 
-        Hud.AddScore(40);
+        Hud.AddScore(GameData.ScoreValues[GameData.ScoreEnum.MothershipHit]);
         CheckEnemyLeft();
 
         Tween tween = CreateTween();
