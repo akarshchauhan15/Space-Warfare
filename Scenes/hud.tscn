@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=24 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
@@ -6,6 +6,13 @@
 [ext_resource type="AudioStream" uid="uid://bcsde2d2ssx17" path="res://Assets/Sounds/laserShoot.wav" id="4_6fbih"]
 [ext_resource type="AudioStream" uid="uid://3ojq1e62q4bn" path="res://Assets/Sounds/enemyHit.wav" id="5_t1xeu"]
 [ext_resource type="AudioStream" uid="uid://bow17b0le23ji" path="res://Assets/Sounds/bunkerExplosion.wav" id="6_36asn"]
+[ext_resource type="Script" uid="uid://0bd52mc4cnha" path="res://Scripts/Slide.cs" id="7_8jye8"]
+[ext_resource type="Texture2D" uid="uid://cw2qfaejqvvgy" path="res://Assets/Icons/fullscreen.png" id="8_4f5kr"]
+[ext_resource type="Texture2D" uid="uid://dehucrs58gea" path="res://Assets/Icons/windowed.png" id="9_piegi"]
+[ext_resource type="Texture2D" uid="uid://df7q18tbr4yd2" path="res://Assets/Icons/sound_enabled.svg" id="10_i2avg"]
+[ext_resource type="Texture2D" uid="uid://pxs6dq8mld" path="res://Assets/Icons/sound_disabled.svg" id="11_1a2va"]
+[ext_resource type="Texture2D" uid="uid://bgbf4fm02reuq" path="res://Assets/Icons/question_mark.svg" id="12_i2avg"]
+[ext_resource type="Texture2D" uid="uid://cy70vr1ftcaat" path="res://Assets/Icons/exit.svg" id="13_1a2va"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_8jye8"]
 device = -1
@@ -524,3 +531,70 @@ max_polyphony = 3
 [node name="BunkerExplosion" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("6_36asn")
 volume_db = -4.0
+
+[node name="MenuSlide" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -95.0
+offset_right = 28.0
+offset_bottom = 720.0
+script = ExtResource("7_8jye8")
+Slide_Direction = 1
+Slide_Time = 0.4
+Hide_Delay = 0.1
+metadata/_custom_type_script = "uid://0bd52mc4cnha"
+
+[node name="ColorRect" type="ColorRect" parent="MenuSlide"]
+layout_mode = 1
+offset_right = 95.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.1254902)
+
+[node name="FullscreenButton" type="TextureButton" parent="MenuSlide/ColorRect"]
+layout_mode = 0
+offset_left = 17.5
+offset_top = 15.0
+offset_right = 70.0
+offset_bottom = 75.0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("8_4f5kr")
+texture_pressed = ExtResource("9_piegi")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SoundButton" type="TextureButton" parent="MenuSlide/ColorRect"]
+layout_mode = 0
+offset_left = 17.5
+offset_top = 89.0
+offset_right = 70.0
+offset_bottom = 149.0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("10_i2avg")
+texture_pressed = ExtResource("11_1a2va")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="InfoButton" type="TextureButton" parent="MenuSlide/ColorRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 578.0
+offset_right = 78.0
+offset_bottom = 624.0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("12_i2avg")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ExitButton" type="TextureButton" parent="MenuSlide/ColorRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 650.0
+offset_right = 78.0
+offset_bottom = 691.0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("13_1a2va")
+ignore_texture_size = true
+stretch_mode = 5
