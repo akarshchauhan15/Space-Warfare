@@ -12,8 +12,8 @@ public partial class Hud : Control
     {
         base._Ready();
 
-        HealthLabel = GetNode<Label>("HealthInfo/Label");
-        ScoreLabel = GetNode<Label>("ScoreInfo/Score");
+        HealthLabel = GetNode<Label>("MenuSlide/ColorRect/HealthInfo/Label");
+        ScoreLabel = GetNode<Label>("MenuSlide/ColorRect/ScoreInfo/Score");
         Declaration = GetNode<Label>("DeclarationLabel");
         ContinueButton = GetNode<Button>("ContinueButton");
 
@@ -27,7 +27,7 @@ public partial class Hud : Control
 
         if (Win)
         {
-            Hud.AddScore(GameData.ScoreValues[GameData.ScoreEnum.NextStage]);
+            AddScore(GameData.ScoreValues[GameData.ScoreEnum.NextStage]);
             bool StageLeft = Main.CurrentStage < Stages.stages.Count;
             Declaration.Text = (StageLeft) ? "STAGE CLEARED!" : "VICTORY!";
             if (StageLeft) LastRoundWon = true;
@@ -35,7 +35,6 @@ public partial class Hud : Control
         else
             Declaration.Text = "GAME OVER!";
         Declaration.Show();
-        
         GetParent<Main>().RandomShootTimer.Stop();
 
         Tween tween = CreateTween();
