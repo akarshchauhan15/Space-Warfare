@@ -1,6 +1,18 @@
 using Godot;
 using Godot.Collections;
+using System;
 
+public class ScoreEntry
+{
+    public int Score { get; set; }
+    public DateTime Date { get; set; }
+
+    public ScoreEntry(int score)
+    {
+        Score = score;
+        Date = DateTime.Now;
+    }
+}
 public partial class GameData : Resource
 {
     public static PackedScene DropScene = GD.Load<PackedScene>("res://Scenes/enemy_drop.tscn");

@@ -5,21 +5,24 @@ public partial class Player : CharacterBody2D
     [Signal]
     public delegate void OnPlayerHitEventHandler(bool Dead);
 
+    public CollisionShape2D Collision;
+
     Parallax2D StarsParallax;
     Parallax2D Stars2Parallax;
+
+    Timer Cooldown;
+
+    public static int Health = 3;
+    public static int Score = 0;
 
     float MaxVelocity = 500f;
     float Acceleration = 2000f;
     float Friction = 1400f;
 
-    Timer Cooldown;
-    public static int Health = 3;
-    public static int Score = 0;
-
     public override void _Ready()
     {
         base._Ready();
-
+        Collision = GetNode<CollisionShape2D>("CollisionShape2D");
         StarsParallax = GetNode<Parallax2D>("../../Stars");
         Stars2Parallax = GetNode<Parallax2D>("../../Stars2");
         Cooldown = GetNode<Timer>("CooldownTimer");

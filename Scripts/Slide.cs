@@ -7,7 +7,7 @@ public partial class Slide : Control
 {
     [Signal]
     public delegate void MotionCompletedEventHandler(bool Hidden);
-    enum Direction {Left, Right, Up, Down};
+    enum Direction { Left, Right, Up, Down };
 
     [ExportGroup("Properties")]
     [Export]
@@ -20,6 +20,18 @@ public partial class Slide : Control
     float Appear_Delay = 0;
     [Export]
     float Hide_Delay = 0;
+
+    [ExportSubgroup("Transition")]
+    [Export]
+    Tween.TransitionType AppearTransition = Tween.TransitionType.Sine;
+    [Export]
+    Tween.TransitionType HideTransition = Tween.TransitionType.Sine;
+
+    [ExportSubgroup("Easing")]
+    [Export]
+    Tween.EaseType AppearEasing = Tween.EaseType.Out;
+    [Export]
+    Tween.EaseType HideEasing = Tween.EaseType.In;
 
     public Vector2 HiddenPos;
     public Vector2 OpenPos;
@@ -46,13 +58,13 @@ public partial class Slide : Control
 
         CaseSize = GetNode<ColorRect>("ColorRect").Size;
 
-        foreach (Control child in GetChildren(true)) 
+        foreach (Control child in GetChildren(true))
             child.MouseFilter = MouseFilterEnum.Pass;
-       
+
         HiddenPos = GlobalPosition;
         GetOpenPos();
     }
-    public void GetOpenPos() 
+    public void GetOpenPos()
     {
         switch (Slide_Direction)
         {
@@ -79,7 +91,7 @@ public partial class Slide : Control
         Kill();
         tween = CreateTween();
         tween.Finished += () => EmitSignal(false);
-        tween.TweenProperty(this, "global_position", OpenPos, Mathf.Lerp(0, Slide_Time, Mathf.Abs((GlobalPosition - OpenPos).Length()) / Progression)).SetTrans(Tween.TransitionType.Sine).SetDelay(Appear_Delay); ;
+        tween.TweenProperty(this, "global_position", OpenPos, Mathf.Lerp(0, Slide_Time, Mathf.Abs((GlobalPosition - OpenPos).Length()) / Progression)).SetTrans(AppearTransition).SetEase(AppearEasing).SetDelay(Appear_Delay);
     }
     public void OnMouseExited()
     {
@@ -90,15 +102,8 @@ public partial class Slide : Control
         float Del;
         if (GlobalPosition == OpenPos) Del = Hide_Delay;
         else Del = 0;
-        tween.TweenProperty(this, "global_position", HiddenPos, Mathf.Lerp(0, Slide_Time, Mathf.Abs((GlobalPosition - HiddenPos).Length()) / Progression)).SetTrans(Tween.TransitionType.Sine).SetDelay(Del);
+        tween.TweenProperty(this, "global_position", HiddenPos, Mathf.Lerp(0, Slide_Time, Mathf.Abs((GlobalPosition - HiddenPos).Length()) / Progression)).SetTrans(HideTransition).SetEase(HideEasing).SetDelay(Del);
     }
-    public void Kill() 
-    {
-        if (tween != null)      
-            tween.Kill(); 
-    }
-    public void EmitSignal(bool Hidden)
-    {
-        EmitSignal(SignalName.MotionCompleted, Hidden);
-    }
+    public void Kill() {if (tween != null) tween.Kill(); }
+    public void EmitSignal(bool Hidden) => EmitSignal(SignalName.MotionCompleted, Hidden);
 }

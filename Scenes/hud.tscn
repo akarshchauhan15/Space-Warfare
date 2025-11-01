@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=32 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dehucrs58gea" path="res://Assets/Icons/windowed.png" id="9_piegi"]
 [ext_resource type="Texture2D" uid="uid://df7q18tbr4yd2" path="res://Assets/Icons/sound_enabled.svg" id="10_i2avg"]
 [ext_resource type="Texture2D" uid="uid://pxs6dq8mld" path="res://Assets/Icons/sound_disabled.svg" id="11_1a2va"]
+[ext_resource type="Texture2D" uid="uid://b86vlyn1n2gv2" path="res://Assets/Icons/scores.svg" id="12_1a2va"]
 [ext_resource type="Texture2D" uid="uid://bgbf4fm02reuq" path="res://Assets/Icons/question_mark.svg" id="12_i2avg"]
 [ext_resource type="Texture2D" uid="uid://cy70vr1ftcaat" path="res://Assets/Icons/exit.svg" id="13_1a2va"]
 
@@ -241,6 +242,36 @@ _data = {
 &"Startup": SubResource("Animation_36asn")
 }
 
+[sub_resource type="InputEventKey" id="InputEventKey_i2avg"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="InputEventKey" id="InputEventKey_1a2va"]
+device = -1
+keycode = 4194342
+
+[sub_resource type="Shortcut" id="Shortcut_1a2va"]
+events = [SubResource("InputEventKey_i2avg"), SubResource("InputEventKey_1a2va"), null]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ssfue"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_8bf2m"]
+events = [SubResource("InputEventKey_ssfue")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8bf2m"]
+device = -1
+keycode = 71
+unicode = 103
+
+[sub_resource type="Shortcut" id="Shortcut_ba8gd"]
+events = [SubResource("InputEventKey_8bf2m")]
+
+[sub_resource type="Shortcut" id="Shortcut_pbtju"]
+
 [node name="HUD" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -384,13 +415,14 @@ offset_right = 28.0
 offset_bottom = 720.0
 script = ExtResource("7_i2avg")
 Slide_Direction = 1
+Hide_Delay = 0.06
 metadata/_custom_type_script = "uid://0bd52mc4cnha"
 
 [node name="ColorRect" type="ColorRect" parent="MenuSlide"]
 layout_mode = 1
 offset_right = 95.0
 offset_bottom = 720.0
-color = Color(0, 0, 0, 0.1254902)
+color = Color(0, 0, 0, 0.23529412)
 
 [node name="ScoreInfo" type="Control" parent="MenuSlide/ColorRect"]
 visible = false
@@ -452,9 +484,14 @@ theme_override_font_sizes/font_size = 40
 text = "x3"
 
 [node name="Buttons" type="Control" parent="MenuSlide/ColorRect"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="FullscreenButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
 layout_mode = 0
@@ -464,6 +501,9 @@ offset_right = 70.0
 offset_bottom = 75.0
 mouse_filter = 1
 toggle_mode = true
+shortcut = SubResource("Shortcut_1a2va")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 texture_normal = ExtResource("8_4f5kr")
 texture_pressed = ExtResource("9_piegi")
 ignore_texture_size = true
@@ -477,19 +517,40 @@ offset_right = 70.0
 offset_bottom = 149.0
 mouse_filter = 1
 toggle_mode = true
+shortcut = SubResource("Shortcut_8bf2m")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 texture_normal = ExtResource("10_i2avg")
 texture_pressed = ExtResource("11_1a2va")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ScoresButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
+layout_mode = 1
+offset_left = 18.0
+offset_top = 331.0
+offset_right = 70.0
+offset_bottom = 377.0
+mouse_filter = 1
+toggle_mode = true
+shortcut = SubResource("Shortcut_ba8gd")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("12_1a2va")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="InfoButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
 layout_mode = 0
 offset_left = 18.0
-offset_top = 579.0
+offset_top = 575.0
 offset_right = 78.0
 offset_bottom = 621.0
 mouse_filter = 1
 toggle_mode = true
+shortcut = SubResource("Shortcut_pbtju")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 texture_normal = ExtResource("12_i2avg")
 ignore_texture_size = true
 stretch_mode = 5
@@ -502,6 +563,31 @@ offset_right = 78.0
 offset_bottom = 691.0
 mouse_filter = 1
 toggle_mode = true
+shortcut_feedback = false
+shortcut_in_tooltip = false
 texture_normal = ExtResource("13_1a2va")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="ScorePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -484.0
+offset_top = -245.5
+offset_right = 484.0
+offset_bottom = 245.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ScorePanel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 16.5
+offset_right = 235.0
+offset_bottom = 94.0
+text = "SCORES"

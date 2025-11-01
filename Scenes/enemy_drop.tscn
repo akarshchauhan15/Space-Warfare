@@ -14,6 +14,7 @@ border_width_bottom = 2
 border_color = Color(0.16167904, 0.18862553, 0.2890625, 1)
 
 [node name="EnemyDrop" type="Area2D"]
+z_index = -1
 collision_layer = 0
 script = ExtResource("1_75b5a")
 

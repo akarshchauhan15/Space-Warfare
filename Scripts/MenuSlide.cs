@@ -19,6 +19,8 @@ public partial class MenuSlide : Slide
         SoundButton.Toggled += SetSound;
         ExitButton.Pressed += ExitButtonPressed;
         Hidden += () => ExitConfirmation = false;
+
+        SetSettings();
     }
     private void SetSettings()
     {

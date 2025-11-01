@@ -61,6 +61,7 @@ public partial class Main : CanvasLayer
 
         IsPlaying = true;
         GetNode<Player>("Playground/Player").Velocity = Vector2.Zero;
+        GetNode<Player>("Playground/Player").SetDeferred(Player.PropertyName.Collision, true);
         RandomShootTimer.Start(1);
         MothershipSpawnTimer.Start(5);
     }

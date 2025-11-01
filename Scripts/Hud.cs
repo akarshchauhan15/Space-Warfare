@@ -24,6 +24,7 @@ public partial class Hud : Control
     public void EndGame(bool Win)
     {
         Main.IsPlaying = false;
+        GetNode<Player>("Playground/Player").SetDeferred(Player.PropertyName.Collision, true);
 
         if (Win)
         {

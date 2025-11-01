@@ -3,11 +3,13 @@ using Godot.Collections;
 
 public partial class EnemyDrop : Area2D
 {
-    public int Speed;
+    public float Speed;
     public EnemyDrops.Types DropType;
 
     public static float EnemySpeedMultiplier = 1;
     public static Array<EnemyDrops.Types> ActiveDropEffects = new Array<EnemyDrops.Types>();
+
+    float Acceleration = 30f;
 
     public override void _Ready()
     {
@@ -15,7 +17,11 @@ public partial class EnemyDrop : Area2D
         BodyEntered += OnCollision;
         GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").ScreenExited += QueueFree;
     }
-    public override void _Process(double delta) => Position += Vector2.Down * Speed * (float) delta;
+    public override void _Process(double delta)
+    {
+        Position += Vector2.Down * Speed * (float)delta;
+        Speed += Acceleration * (float)delta;
+    }
 
     public void OnCollision(Node2D Body)
     {     
