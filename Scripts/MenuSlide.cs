@@ -4,6 +4,8 @@ public partial class MenuSlide : Slide
 {
     TextureButton FullscreenButton;
     TextureButton SoundButton;
+    TextureButton PauseButton;
+    TextureButton ScoreButton;
     TextureButton ExitButton;
 
     bool ExitConfirmation = false;
@@ -13,12 +15,19 @@ public partial class MenuSlide : Slide
         base._Ready();
         FullscreenButton = GetNode<TextureButton>("ColorRect/Buttons/FullscreenButton");
         SoundButton = GetNode<TextureButton>("ColorRect/Buttons/SoundButton");
+        PauseButton = GetNode<TextureButton>("ColorRect/Buttons/PauseButton");
+        ScoreButton = GetNode<TextureButton>("ColorRect/Buttons/ScoreButton");
         ExitButton = GetNode<TextureButton>("ColorRect/Buttons/ExitButton");
 
         FullscreenButton.Toggled += ToggleWindowType;
         SoundButton.Toggled += SetSound;
+        PauseButton.Toggled += PauseGame;
+        ScoreButton.Pressed += ScoreButtonPressed;
         ExitButton.Pressed += ExitButtonPressed;
-        Hidden += () => ExitConfirmation = false;
+        MotionCompleted += (bool Hidden) => { if (Hidden) ExitConfirmation = false; };
+
+        GetNode<Main>("../../").GameStarted += () => { PauseButton.Visible = true; };
+        GetNode<Hud>("../").GameEnded += () => { PauseButton.Visible = false; };
 
         SetSettings();
     }
@@ -37,6 +46,20 @@ public partial class MenuSlide : Slide
     {
         AudioServer.SetBusMute(0, Muted);
         ConfigController.SaveSetting("Settings", "Sound", Muted);
+    }
+    private void PauseGame(bool Pause)
+    {
+        if (!Main.IsPlaying) return;
+
+        GetTree().Paused = Pause;
+
+        GetNode<Label>("../DeclarationLabel").Visible = Pause ? true : false;
+        GetNode<Label>("../DeclarationLabel").Text = Pause ? "PAUSED" : "";
+    }
+    private void ScoreButtonPressed()
+    {
+        ScorePanel ScorePanel = GetNode<ScorePanel>("../ScorePanel");
+        ScorePanel.Appear();
     }
     private void ExitButtonPressed()
     {

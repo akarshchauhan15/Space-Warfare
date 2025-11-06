@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=43 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
@@ -12,8 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://df7q18tbr4yd2" path="res://Assets/Icons/sound_enabled.svg" id="10_i2avg"]
 [ext_resource type="Texture2D" uid="uid://pxs6dq8mld" path="res://Assets/Icons/sound_disabled.svg" id="11_1a2va"]
 [ext_resource type="Texture2D" uid="uid://b86vlyn1n2gv2" path="res://Assets/Icons/scores.svg" id="12_1a2va"]
+[ext_resource type="Texture2D" uid="uid://cbl5gooyxwrax" path="res://Assets/Icons/pause.svg" id="12_8bf2m"]
 [ext_resource type="Texture2D" uid="uid://bgbf4fm02reuq" path="res://Assets/Icons/question_mark.svg" id="12_i2avg"]
 [ext_resource type="Texture2D" uid="uid://cy70vr1ftcaat" path="res://Assets/Icons/exit.svg" id="13_1a2va"]
+[ext_resource type="Texture2D" uid="uid://cvink4uewf7ms" path="res://Assets/Icons/play.svg" id="13_ba8gd"]
+[ext_resource type="Script" uid="uid://c4oatfdioatxe" path="res://Scripts/ScorePanel.cs" id="17_ba8gd"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_8jye8"]
 device = -1
@@ -262,6 +265,16 @@ unicode = 109
 [sub_resource type="Shortcut" id="Shortcut_8bf2m"]
 events = [SubResource("InputEventKey_ssfue")]
 
+[sub_resource type="InputEventKey" id="InputEventKey_36s6t"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pbtju"]
+button_index = 6
+
+[sub_resource type="Shortcut" id="Shortcut_yidpd"]
+events = [SubResource("InputEventKey_36s6t"), SubResource("InputEventJoypadButton_pbtju")]
+
 [sub_resource type="InputEventKey" id="InputEventKey_8bf2m"]
 device = -1
 keycode = 71
@@ -271,6 +284,17 @@ unicode = 103
 events = [SubResource("InputEventKey_8bf2m")]
 
 [sub_resource type="Shortcut" id="Shortcut_pbtju"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bf2m"]
+bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.8745098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bf2m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ba8gd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36s6t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbtju"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -409,13 +433,17 @@ stream = ExtResource("6_36asn")
 volume_db = -4.0
 
 [node name="MenuSlide" type="Control" parent="."]
+process_mode = 3
 anchors_preset = 0
 offset_left = -95.0
 offset_right = 28.0
 offset_bottom = 720.0
 script = ExtResource("7_i2avg")
 Slide_Direction = 1
+Appear_Delay = 0.04
 Hide_Delay = 0.06
+AppearTransition = 4
+HideTransition = 4
 metadata/_custom_type_script = "uid://0bd52mc4cnha"
 
 [node name="ColorRect" type="ColorRect" parent="MenuSlide"]
@@ -495,9 +523,9 @@ mouse_filter = 1
 
 [node name="FullscreenButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
 layout_mode = 0
-offset_left = 17.5
+offset_left = 19.5
 offset_top = 15.0
-offset_right = 70.0
+offset_right = 72.0
 offset_bottom = 75.0
 mouse_filter = 1
 toggle_mode = true
@@ -511,9 +539,9 @@ stretch_mode = 5
 
 [node name="SoundButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
 layout_mode = 0
-offset_left = 17.5
+offset_left = 19.5
 offset_top = 89.0
-offset_right = 70.0
+offset_right = 72.0
 offset_bottom = 149.0
 mouse_filter = 1
 toggle_mode = true
@@ -525,12 +553,29 @@ texture_pressed = ExtResource("11_1a2va")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="ScoresButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
+[node name="PauseButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
+visible = false
 layout_mode = 1
-offset_left = 18.0
-offset_top = 331.0
-offset_right = 70.0
-offset_bottom = 377.0
+offset_left = 21.0
+offset_top = 298.0
+offset_right = 73.0
+offset_bottom = 344.0
+mouse_filter = 1
+toggle_mode = true
+shortcut = SubResource("Shortcut_yidpd")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("12_8bf2m")
+texture_pressed = ExtResource("13_ba8gd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ScoreButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
+layout_mode = 1
+offset_left = 21.0
+offset_top = 372.0
+offset_right = 73.0
+offset_bottom = 418.0
 mouse_filter = 1
 toggle_mode = true
 shortcut = SubResource("Shortcut_ba8gd")
@@ -583,11 +628,110 @@ offset_right = 484.0
 offset_bottom = 245.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8bf2m")
+script = ExtResource("17_ba8gd")
 
-[node name="Label" type="Label" parent="ScorePanel"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 16.5
-offset_right = 235.0
-offset_bottom = 94.0
+[node name="CloseButton" type="Button" parent="ScorePanel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8bf2m")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ba8gd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_36s6t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pbtju")
+
+[node name="Control" type="Control" parent="ScorePanel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ScorePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.0
+offset_top = -242.0
+offset_right = -300.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 64
 text = "SCORES"
+horizontal_alignment = 1
+
+[node name="DateList" type="Label" parent="ScorePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 92.0
+offset_top = -148.0
+offset_right = 396.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "- - -"
+horizontal_alignment = 1
+
+[node name="ScoreList" type="Label" parent="ScorePanel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.0
+offset_top = -148.0
+offset_right = -125.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "- - -"
+horizontal_alignment = 1
+
+[node name="NoScorePrompt" type="Label" parent="ScorePanel/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.0
+offset_top = 99.0
+offset_right = 155.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "No previous score were found.
+Try playing few rounds to add some to the list."

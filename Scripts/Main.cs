@@ -4,6 +4,9 @@ using System;
 
 public partial class Main : CanvasLayer
 {
+    [Signal]
+    public delegate void GameStartedEventHandler();
+
     PackedScene EnemyScene;
     PackedScene BunkerScene;
     PackedScene MothershipScene;
@@ -60,8 +63,8 @@ public partial class Main : CanvasLayer
         SetBunkers();
 
         IsPlaying = true;
-        GetNode<Player>("Playground/Player").Velocity = Vector2.Zero;
-        GetNode<Player>("Playground/Player").SetDeferred(Player.PropertyName.Collision, true);
+ 
+        EmitSignal(SignalName.GameStarted);
         RandomShootTimer.Start(1);
         MothershipSpawnTimer.Start(5);
     }

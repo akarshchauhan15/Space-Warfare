@@ -5,7 +5,7 @@ public partial class Player : CharacterBody2D
     [Signal]
     public delegate void OnPlayerHitEventHandler(bool Dead);
 
-    public CollisionShape2D Collision;
+    CollisionShape2D Collision;
 
     Parallax2D StarsParallax;
     Parallax2D Stars2Parallax;
@@ -29,6 +29,9 @@ public partial class Player : CharacterBody2D
 
         StarsParallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.08f, StarsParallax.ScrollOffset.Y);
         Stars2Parallax.ScrollOffset = new Vector2(GlobalPosition.X * 0.04f, Stars2Parallax.ScrollOffset.Y);
+
+        GetNode<Main>("../../").GameStarted += () => { Velocity = Vector2.Zero; Collision.SetDeferred(CollisionShape2D.PropertyName.Disabled, false); };
+        GetNode<Hud>("../../HUD").GameEnded += () => { Collision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true); };
     }
     public void Reset()
     {
@@ -58,8 +61,6 @@ public partial class Player : CharacterBody2D
     }
     public override void _Input(InputEvent @event)
     {
-        base._Input(@event);
-
         if (!Main.IsPlaying) return;
 
         if (@event.IsActionPressed("Shoot") && Cooldown.TimeLeft == 0)

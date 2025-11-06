@@ -1,7 +1,11 @@
 using Godot;
+using System;
 
 public partial class Hud : Control
 {
+    [Signal]
+    public delegate void GameEndedEventHandler();
+
     public static Label HealthLabel;
     static Label ScoreLabel;
     Label Declaration;
@@ -20,11 +24,13 @@ public partial class Hud : Control
         GetNode<Player>("../Playground/Player").OnPlayerHit += PlayerHit;
         ContinueButton.Pressed += ContinueButtonPressed;
         GetNode<Button>("InitialStart/StartButton").Pressed += () => GetNode<AnimationPlayer>("InitialStart/AnimationPlayer").Play("Clicked");
+
+        SetScoreList(true);
     }
     public void EndGame(bool Win)
     {
         Main.IsPlaying = false;
-        GetNode<Player>("Playground/Player").SetDeferred(Player.PropertyName.Collision, true);
+        EmitSignal(SignalName.GameEnded);
 
         if (Win)
         {
@@ -32,6 +38,7 @@ public partial class Hud : Control
             bool StageLeft = Main.CurrentStage < Stages.stages.Count;
             Declaration.Text = (StageLeft) ? "STAGE CLEARED!" : "VICTORY!";
             if (StageLeft) LastRoundWon = true;
+            else { ScoreController.AddScores(Player.Score); SetScoreList(false); }
         }
         else
             Declaration.Text = "GAME OVER!";
@@ -90,5 +97,15 @@ public partial class Hud : Control
         Main.Stage = Stages.stages[Main.CurrentStage - 1];
 
         GetParent<Main>().StartGame();
+    }
+    private void SetScoreList(bool FirstLoad)
+    {
+        ScoreController.LoadScores();
+
+        Tuple<string, string> Score = ScoreController.GetScoreListString();
+        GetNode<Label>("ScorePanel/Control/ScoreList").Text = Score.Item1;
+        GetNode<Label>("ScorePanel/Control/DateList").Text = Score.Item2;
+
+        GetNode<Label>("ScorePanel/Control/NoScorePrompt").Visible = FirstLoad && Score.Item1 == "";
     }
 }
