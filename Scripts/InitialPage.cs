@@ -62,6 +62,7 @@ public partial class InitialPage : Control
         tween = CreateTween();
 
         tween.TweenProperty(this, "modulate:a", 0f, 0.4).SetTrans(Tween.TransitionType.Quad);
+        tween.TweenCallback(Callable.From(() => QueueFree()));
     }
     private void SkipButtonDown()
     {
