@@ -33,6 +33,8 @@ public partial class InitialPage : Control
         SkipHoldTimer.Timeout += Destroy;
 
         SkipHoldTimer.WaitTime = SkipTime;
+
+        Counter.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
     }
     private void ChangePage(bool MoveForward)
     {
