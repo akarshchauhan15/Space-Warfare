@@ -8,13 +8,14 @@ public partial class ConfigController : Node
 
     public override void _Ready()
     {
+        
         if (!FileAccess.FileExists(path))
-            ResetSettings();
-        else
         {
-            config.Load(path);
-            //GetTree().Root.GetNode<Control>("Main/HUD/InitialPage").QueueFree();
+            ResetSettings();
+            GetTree().Root.GetNode<Control>("Main/HUD").AddChild(GD.Load<PackedScene>("res://Scenes/initial_page.tscn").Instantiate<InitialPage>());
         }
+        else
+            config.Load(path);
     }
     public static void ResetSettings()
     {

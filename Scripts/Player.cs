@@ -60,6 +60,7 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
     }
     public override void _Input(InputEvent @event)
+
     {
         if (!Main.IsPlaying) return;
 

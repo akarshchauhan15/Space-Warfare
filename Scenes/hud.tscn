@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cba3bvjolwhhe"]
+[gd_scene load_steps=59 format=3 uid="uid://cba3bvjolwhhe"]
 
 [ext_resource type="Script" uid="uid://ctahnuskmmp6w" path="res://Scripts/Hud.cs" id="1_bjfho"]
 [ext_resource type="Texture2D" uid="uid://c8g7tp2dvj1s3" path="res://Assets/Art/Exported/Heart.png" id="2_6fbih"]
@@ -16,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://bgbf4fm02reuq" path="res://Assets/Icons/question_mark.svg" id="12_i2avg"]
 [ext_resource type="Texture2D" uid="uid://cy70vr1ftcaat" path="res://Assets/Icons/exit.svg" id="13_1a2va"]
 [ext_resource type="Texture2D" uid="uid://cvink4uewf7ms" path="res://Assets/Icons/play.svg" id="13_ba8gd"]
-[ext_resource type="Script" uid="uid://c4oatfdioatxe" path="res://Scripts/ScorePanel.cs" id="17_ba8gd"]
+[ext_resource type="Script" uid="uid://dhlx2p48rxbbd" path="res://Scripts/AnimatedPanel.cs" id="17_36s6t"]
+[ext_resource type="Texture2D" uid="uid://c3r27d1wbie4b" path="res://Assets/Art/Exported/Player.png" id="18_36s6t"]
+[ext_resource type="Script" uid="uid://c4oatfdioatxe" path="res://Scripts/InfoPage.cs" id="18_pbtju"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_8jye8"]
 device = -1
@@ -254,16 +256,24 @@ unicode = 102
 device = -1
 keycode = 4194342
 
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_yidpd"]
+button_index = 11
+pressed = true
+
 [sub_resource type="Shortcut" id="Shortcut_1a2va"]
-events = [SubResource("InputEventKey_i2avg"), SubResource("InputEventKey_1a2va"), null]
+events = [SubResource("InputEventKey_i2avg"), SubResource("InputEventKey_1a2va"), SubResource("InputEventJoypadButton_yidpd")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_ssfue"]
 device = -1
 keycode = 77
 unicode = 109
 
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_0iicw"]
+button_index = 12
+pressed = true
+
 [sub_resource type="Shortcut" id="Shortcut_8bf2m"]
-events = [SubResource("InputEventKey_ssfue")]
+events = [SubResource("InputEventKey_ssfue"), SubResource("InputEventJoypadButton_0iicw")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_36s6t"]
 device = -1
@@ -283,10 +293,18 @@ unicode = 103
 [sub_resource type="Shortcut" id="Shortcut_ba8gd"]
 events = [SubResource("InputEventKey_8bf2m")]
 
+[sub_resource type="InputEventKey" id="InputEventKey_ajim5"]
+device = -1
+keycode = 4194332
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_vxf74"]
+button_index = 4
+
 [sub_resource type="Shortcut" id="Shortcut_pbtju"]
+events = [SubResource("InputEventKey_ajim5"), SubResource("InputEventJoypadButton_vxf74")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bf2m"]
-bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.8745098)
+bg_color = Color(0.049353853, 0.067807995, 0.14453125, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bf2m"]
 
@@ -295,6 +313,54 @@ bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.8745098)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36s6t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbtju"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pbtju"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ajim5"]
+button_index = 1
+
+[sub_resource type="Shortcut" id="Shortcut_vxf74"]
+events = [SubResource("InputEventKey_pbtju"), SubResource("InputEventJoypadButton_ajim5")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36s6t"]
+bg_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbtju"]
+bg_color = Color(0.11377843, 0.18014914, 0.34765625, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yidpd"]
+bg_color = Color(0.1661932, 0.2631392, 0.5078125, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iicw"]
+bg_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.46966994, 0.6022525, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yidpd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0iicw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ajim5"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -538,6 +604,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="SoundButton" type="TextureButton" parent="MenuSlide/ColorRect/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 19.5
 offset_top = 89.0
@@ -615,6 +682,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="ScorePanel" type="Panel" parent="."]
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -629,7 +697,8 @@ offset_bottom = 245.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8bf2m")
-script = ExtResource("17_ba8gd")
+script = ExtResource("17_36s6t")
+metadata/_custom_type_script = "uid://dhlx2p48rxbbd"
 
 [node name="CloseButton" type="Button" parent="ScorePanel"]
 show_behind_parent = true
@@ -649,6 +718,9 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_8bf2m")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ba8gd")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_36s6t")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pbtju")
+shortcut = SubResource("Shortcut_vxf74")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 
 [node name="Control" type="Control" parent="ScorePanel"]
 clip_contents = true
@@ -735,3 +807,262 @@ theme_override_fonts/font = ExtResource("3_t1xeu")
 theme_override_font_sizes/font_size = 36
 text = "No previous score were found.
 Try playing few rounds to add some to the list."
+
+[node name="InfoPage" type="Panel" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8bf2m")
+script = ExtResource("18_pbtju")
+
+[node name="CloseButton" type="Button" parent="InfoPage"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1056.0
+offset_top = -78.0
+offset_right = 1235.0
+offset_bottom = -24.0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../Control/Based/LinkButton")
+focus_neighbor_top = NodePath("../Control/InitialTutorialButton")
+focus_neighbor_right = NodePath("../Control/Based/LinkButton")
+focus_neighbor_bottom = NodePath("../Control/Source/LinkButton")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.87058824, 0.83137256, 0.9529412, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/h_separation = 6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_36s6t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbtju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yidpd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0iicw")
+text = "BACK"
+
+[node name="Control" type="Control" parent="InfoPage"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.0
+offset_top = -271.0
+offset_right = 337.0
+offset_bottom = -112.99899
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 146
+text = "SPACE WARFARE"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="InfoPage/Control/Title"]
+layout_mode = 0
+offset_left = 833.0
+offset_top = 32.0
+offset_right = 959.0
+offset_bottom = 126.0
+texture = ExtResource("18_36s6t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+offset_left = 71.0
+offset_top = 333.0
+offset_right = 756.0
+offset_bottom = 372.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "THIS GAME WAS MADE AS A PART OF 20 GAMES CHALLENGE."
+
+[node name="Developer" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+offset_left = 77.0
+offset_top = 426.0
+offset_right = 246.0
+offset_bottom = 465.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "DEVELOPED BY"
+
+[node name="LinkButton" type="LinkButton" parent="InfoPage/Control/Developer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 218.0
+offset_bottom = 40.0
+grow_horizontal = 0
+focus_neighbor_left = NodePath("../../Source/LinkButton")
+focus_neighbor_top = NodePath("../../../CloseButton")
+focus_neighbor_right = NodePath("../../Source/LinkButton")
+focus_neighbor_bottom = NodePath("../../Based/LinkButton")
+focus_mode = 2
+theme_override_colors/font_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+theme_override_colors/font_focus_color = Color(0.28480396, 0.4529412, 0.875, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/underline_spacing = 4
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yidpd")
+text = "AKARSH CHAUHAN"
+uri = "https://github.com/akarshchauhan15"
+
+[node name="Based" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+offset_left = 77.0
+offset_top = 482.0
+offset_right = 194.0
+offset_bottom = 521.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "BASED ON"
+
+[node name="LinkButton" type="LinkButton" parent="InfoPage/Control/Based"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 205.0
+offset_bottom = 40.0
+grow_horizontal = 0
+focus_neighbor_left = NodePath("../../InitialTutorialButton")
+focus_neighbor_top = NodePath("../../Developer/LinkButton")
+focus_neighbor_right = NodePath("../../InitialTutorialButton")
+focus_neighbor_bottom = NodePath("../../../CloseButton")
+focus_mode = 2
+theme_override_colors/font_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+theme_override_colors/font_focus_color = Color(0.28627452, 0.45490196, 0.8745098, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/underline_spacing = 4
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0iicw")
+text = "SPACE INVADERS"
+uri = "https://en.wikipedia.org/wiki/Space_Invaders"
+
+[node name="Tools" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+offset_left = 77.0
+offset_top = 540.0
+offset_right = 149.0
+offset_bottom = 579.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "USING"
+
+[node name="Tools" type="Label" parent="InfoPage/Control/Tools"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 8.0
+offset_right = 245.0
+offset_bottom = 135.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/paragraph_spacing = -10
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "GODOT
+VISUAL STUDIO
+INKSCAPE
+LIBRESPRITE"
+
+[node name="Source" type="Label" parent="InfoPage/Control"]
+layout_mode = 1
+offset_left = 798.0
+offset_top = 426.0
+offset_right = 956.0
+offset_bottom = 465.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "SOURCE CODE"
+
+[node name="LinkButton" type="LinkButton" parent="InfoPage/Control/Source"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 90.0
+offset_bottom = 40.0
+grow_horizontal = 0
+focus_neighbor_left = NodePath("../../Developer/LinkButton")
+focus_neighbor_top = NodePath("../../../CloseButton")
+focus_neighbor_right = NodePath("../../Developer/LinkButton")
+focus_neighbor_bottom = NodePath("../../InitialTutorialButton")
+focus_mode = 2
+theme_override_colors/font_color = Color(0.14117648, 0.22352941, 0.43137255, 1)
+theme_override_colors/font_focus_color = Color(0.28627452, 0.45490196, 0.8745098, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/underline_spacing = 4
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ajim5")
+text = "GITHUB"
+uri = "https://github.com/akarshchauhan15/Space-Warfare"
+
+[node name="InitialTutorialButton" type="Button" parent="InfoPage/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 795.0
+offset_top = -207.0
+offset_right = 1078.0
+offset_bottom = -152.0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../Based/LinkButton")
+focus_neighbor_top = NodePath("../Source/LinkButton")
+focus_neighbor_right = NodePath("../Based/LinkButton")
+focus_neighbor_bottom = NodePath("../../CloseButton")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.8710619, 0.83190817, 0.953125, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/h_separation = 6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_36s6t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbtju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yidpd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0iicw")
+text = "VIEW INITIAL TUTORIAL"
