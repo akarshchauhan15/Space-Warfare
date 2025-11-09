@@ -9,6 +9,8 @@ public partial class InfoPage : AnimatedPanel
         base._Ready();
         InitialTutorialButton = GetNode<Button>("Control/InitialTutorialButton");
         InitialTutorialButton.Pressed += InitialTutorialButtonPressed;
+
+        GetNode<Label>("Control/Version").Text = ProjectSettings.GetSetting("application/config/version").ToString();
     }
     private void InitialTutorialButtonPressed()
     {

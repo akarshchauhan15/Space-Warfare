@@ -902,6 +902,18 @@ theme_override_fonts/font = ExtResource("3_t1xeu")
 theme_override_font_sizes/font_size = 36
 text = "THIS GAME WAS MADE AS A PART OF 20 GAMES CHALLENGE."
 
+[node name="Version" type="Label" parent="InfoPage/Control"]
+modulate = Color(1, 1, 1, 0.3137255)
+layout_mode = 1
+offset_left = 11.0
+offset_top = 680.0
+offset_right = 169.0
+offset_bottom = 719.0
+theme_override_constants/paragraph_spacing = -6
+theme_override_fonts/font = ExtResource("3_t1xeu")
+theme_override_font_sizes/font_size = 36
+text = "v0.0.0"
+
 [node name="Developer" type="Label" parent="InfoPage/Control"]
 layout_mode = 1
 offset_left = 77.0
