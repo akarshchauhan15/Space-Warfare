@@ -7,9 +7,10 @@
 - Read or skip the initial guide provided.
 
 ## Images
-![Start](<img width="1823" height="1064" alt="Start" src="https://github.com/user-attachments/assets/caad4cf9-cabc-4ee4-b909-3338888e9c52" />)
-![Playing](<img width="1859" height="1034" alt="Play" src="https://github.com/user-attachments/assets/a2dcd748-c76b-4efe-9f47-10b051bd1ce0" />)
-![Hovered](<img width="1853" height="1041" alt="Hover" src="https://github.com/user-attachments/assets/db02c4d1-451a-45fc-9050-90fff1e70d13" />)
+
+<img width="1816" height="1021" alt="Start" src="https://github.com/user-attachments/assets/d20d2e6d-0b91-4836-be70-7fcb2052f2a8" />
+<img width="1859" height="1034" alt="Play" src="https://github.com/user-attachments/assets/78049e55-1a0c-48e7-a3bb-78a6bd790615" />
+<img width="1853" height="1041" alt="Hover" src="https://github.com/user-attachments/assets/56c3ee0e-628b-490f-b21d-de085e2ebeb5" />
 
 # Game Design Document
 
