@@ -14,7 +14,9 @@ public partial class InfoPage : AnimatedPanel
     }
     private void InitialTutorialButtonPressed()
     {
-        GetParent().AddChild(GD.Load<PackedScene>("res://Scenes/initial_page.tscn").Instantiate<InitialPage>());
+        InitialPage Initial = GD.Load<PackedScene>("res://Scenes/initial_page.tscn").Instantiate<InitialPage>();
+        Initial.ProcessMode = ProcessModeEnum.Always;
+        GetParent().AddChild(Initial);
     }
 
 }
