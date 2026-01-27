@@ -32,10 +32,10 @@ Arcade and Retro
 People who want to experience a Space Invaders like game again.
 
 ### Development Software
-- **Godot 4** for game engine.
-- **Visual Studio** for IDE.
-- **Inkscape** for vector graphics.
-- **LibreSprite** for art.
+- **Godot 4**  (Game Engine)
+- **Visual Studio** (IDE)
+- **Inkscape**  (Vector Graphics)
+- **LibreSprite** (Pixel Art)
 
 ## Concept
 
@@ -49,12 +49,12 @@ To view the menu panel, hover the mouse near left edge of screen. Or simply use 
 
 #### Shortcuts
 
-Toggle Fullscreen/Windowed - F
-Mute/Unmute game audio - M
-Pause/Resume - Escape
-View previous scores - G
-Information page - F1
-Quit game - ALT + F4
+- Toggle Fullscreen/Windowed - F
+- Mute/Unmute game audio - M
+- Pause/Resume - Escape
+- View previous scores - G
+- Information page - F1
+- Quit game - ALT + F4
 
 ## Game Experience
 
