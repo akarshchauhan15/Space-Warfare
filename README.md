@@ -17,7 +17,7 @@
 ## Introduction
 
 ### Summary
-Tile Breaker is a retro style arcade like game based on Breakout (1976) by Atari with features and graphical improvements.
+Space Warfare is a retro style arcade like game based on Space Invaders with features and graphical improvements.
 
 ### Inspiration
 **Space Invaders** by Tomohiro Nishikado
